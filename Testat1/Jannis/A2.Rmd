@@ -1,0 +1,37 @@
+---
+title: "Testat 1 Aufgabe 2: Visualisierung von Datensätzen"
+output: html_notebook
+---
+
+## 2.1
+### 2.1.1
+```{r}
+library(ggplot2)
+animals = MASS::mammals
+ggplot(animals) +
+  geom_point(aes(x=body, y=brain)) +
+  labs(x='Körpergewicht (kg)', y='Gehirngewicht (g)', ) +
+  scale_x_log10() +
+  scale_y_log10()
+```
+### 2.1.2
+```{r}
+library(dplyr)
+brainWeightRatioDf = animals |> mutate(r=brain / body) |> select(r) |> arrange(-r)
+top = brainWeightRatioDf |> head(10)
+bottom = brainWeightRatioDf |> tail(10)
+knitr::kable(top)
+knitr::kable(bottom)
+```
+## 2.2
+### 2.2.1
+```{r}
+rabbits = MASS::Rabbit
+ggplot(rabbits) +
+  geom_line(aes(x=BPchange, y=Dose, group=Animal))
+```
+### 2.2.2
+```{r}
+ggplot(rabbits) +
+  geom_boxplot(aes(x=BPchange, group=Animal))
+```
