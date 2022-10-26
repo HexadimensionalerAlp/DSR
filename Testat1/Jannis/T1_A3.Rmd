@@ -1,0 +1,43 @@
+---
+title: "Testat 1 Aufgabe 3: Covid19: Impffortschritt in Deutschland"
+output: html_notebook
+---
+
+## 3.1
+```{r}
+vaccFile = url('https://impfdashboard.de/static/data/germany_vaccinations_timeseries_v2.tsv')
+delivFile = url('https://impfdashboard.de/static/data/germany_deliveries_timeseries_v2.tsv')
+vaccStateFile = url('https://impfdashboard.de/static/data/germany_vaccinations_by_state.tsv')
+
+vacc = data.frame(read.table(vaccFile, sep='\t', header=TRUE))
+deliv = data.frame(read.table(delivFile, sep='\t', header=TRUE))
+vaccState = data.frame(read.table(vaccStateFile, sep='\t', header=TRUE))
+```
+```{r}
+vacc$date = as.Date(vacc$date, '%Y-%m-%d')
+deliv$date = as.Date(deliv$date, '%Y-%m-%d')
+
+head(vacc |> select(1:3), 3)
+head(deliv |> select(1:3), 3)
+head(vaccState |> select(1:3), 3)
+```
+## 3.2
+### 3.2.1
+```{r}
+library(dplyr)
+vacc2 = tibble(vacc)
+
+```
+### 3.2.2
+```{r}
+library(ggplot2)
+
+ggplot(vacc2) +
+  geom_line(aes(x=date, y='Impfdosen pro Tag', group=Hersteller))
+
+```
+## 3.3
+```{r}
+
+
+```
