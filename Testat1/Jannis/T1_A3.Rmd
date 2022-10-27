@@ -17,15 +17,16 @@ vaccState = data.frame(read.table(vaccStateFile, sep='\t', header=TRUE))
 vacc$date = as.Date(vacc$date, '%Y-%m-%d')
 deliv$date = as.Date(deliv$date, '%Y-%m-%d')
 
-head(vacc |> select(1:3), 3)
-head(deliv |> select(1:3), 3)
-head(vaccState |> select(1:3), 3)
+head(vacc |> dplyr::select(1:3), 3)
+head(deliv |> dplyr::select(1:3), 3)
+head(vaccState |> dplyr::select(1:3), 3)
 ```
 ## 3.2
 ### 3.2.1
 ```{r}
 library(dplyr)
 vacc2 = tibble(vacc)
+# pivot_longer() verwenden
 
 ```
 ### 3.2.2

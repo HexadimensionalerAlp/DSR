@@ -16,7 +16,8 @@ ggplot(animals) +
 ```
 ### 2.1.2
 ```{r}
-brainWeightRatioDf = animals |> mutate(r=brain / body) |> select(r) |> arrange(-r)
+library(dplyr)
+brainWeightRatioDf = animals |> mutate(r=brain / body) |> dplyr::select(r) |> arrange(-r)
 top = brainWeightRatioDf |> head(10)
 bottom = brainWeightRatioDf |> tail(10)
 knitr::kable(top)
