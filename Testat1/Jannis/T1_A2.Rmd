@@ -28,10 +28,12 @@ knitr::kable(bottom)
 ```{r}
 rabbits = MASS::Rabbit
 ggplot(rabbits) +
-  geom_line(aes(x=BPchange, y=Dose, group=Animal))
+  geom_line(aes(x=BPchange, y=Dose)) +
+  facet_wrap(~ Treatment + Animal, ncol = 5)
 ```
 ### 2.2.2
 ```{r}
 ggplot(rabbits) +
-  geom_boxplot(aes(x=BPchange, group=Animal))
+  geom_boxplot(aes(x=Dose, y=BPchange, group=Animal)) +
+  facet_wrap(~ Treatment)
 ```

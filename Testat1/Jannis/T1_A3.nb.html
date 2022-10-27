@@ -1768,36 +1768,46 @@ vaccState = data.frame(read.table(vaccStateFile, sep=&#39;\t&#39;, header=TRUE))
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmFjYyRkYXRlID0gYXMuRGF0ZSh2YWNjJGRhdGUsICclWS0lbS0lZCcpXG5kZWxpdiRkYXRlID0gYXMuRGF0ZShkZWxpdiRkYXRlLCAnJVktJW0tJWQnKVxuXG5oZWFkKHZhY2MgfD4gc2VsZWN0KDE6MyksIDMpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmFjYyRkYXRlID0gYXMuRGF0ZSh2YWNjJGRhdGUsICclWS0lbS0lZCcpXG5kZWxpdiRkYXRlID0gYXMuRGF0ZShkZWxpdiRkYXRlLCAnJVktJW0tJWQnKVxuXG5oZWFkKHZhY2MgfD4gZHBseXI6OnNlbGVjdCgxOjMpLCAzKVxuYGBgIn0= -->
 <pre class="r"><code>vacc$date = as.Date(vacc$date, &#39;%Y-%m-%d&#39;)
 deliv$date = as.Date(deliv$date, &#39;%Y-%m-%d&#39;)
 
-head(vacc |&gt; select(1:3), 3)</code></pre>
+head(vacc |&gt; dplyr::select(1:3), 3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJRVTdETUJEY3hER29rZG9pY2VFVENRZ09jSXhFeFFNUVNEMGdWVzdpdGxGZHUwb2M0TWhuZUFCM0RyeWhEeXBkeDdhVTVHRHQ3bmgzWnNkK25zM3Y0bmtNQUFTaU1BQkNNUVg2K3ZLVVBBQWlXQVFRd2NqRVQyeTZiRHVCVEV6TUR0ZC9wajA3M0lDTFdadjBCMmt1V0YxamN0RUJveG5USE9NUno5aVNMckQrL29XZ2ZPeGdiNGo5SUhZL0pKVnN4ejBwOGFTRkliWDV0RkExbDR0dHMyc0UwK1c3ZzY4c3ZDeVYxRHpmZE83Ny9LTktmYVJld3l3VGZsbHJ4RGFHL3dORE1XcXpkRlhoaUxYVm96dFhlNDJTU0JhYUo2U0Q0YUFhQU5OR0d2RWl5VGVOM0NhM1JxQzl0bWZzSXVublJwTDR4YWlqT3VOeVhVci9MRlN3SlJldW1LREoxbU82cjBxcHZSTkU2MVFyelh4Zm5DdmhFZnRseHhQUWpxd2RPUUlBQUE9PSJ9 -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJRVTdETUJEY3hER29rZG9pY2VFVENTQU9jSXhFeFFNUVNEMGdWVzdpdGxGZHUwb2M0TWhuZUFCM0RyeWhEeXBkeDdhVTVHRHQ3bmgzWnNkK25zM3Y0bmtNQUFTaU1BQkNNUVg2K3ZLVVBBQWlXQVFRd2NqRVQyeTZiRHVCVEV6TUR0ZC9wajA3M0lDTFdadjBCMmt1V0YxamN0RUJveG5USE9NUno5aVNMckQrL29XZ2ZPeGdiNGo5SUhZL0pKVnN4ejBwOGFTRkliWDV0RkExbDR0dHMyc0UwK1c3ZzY4c3ZDeVYxRHpmZE83Ny9LTktmYVJld3l3VGZsbHJ4RGFHL3dORE1XcXpkRlhoaUxYVm96dFhlNDJTU0JhYUo2U0Q0YUFhQU5OR0d2RWl5VGVOM0NhM1JxQzl0bWZzSXVublJwTDR4YWlqT3VOeVhVci9MRlN3SlJldW1LREoxbU82cjBxcHZSTkU2MVFyelh4Zm5DdmhFZnRseHhPMjZFNjRPUUlBQUE9PSJ9 -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["dosen_kumulativ"],"name":[2],"type":["int"],"align":["right"]},{"label":["dosen_biontech_kumulativ"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"2020-12-27","2":"24421","3":"24412","_rn_":"1"},{"1":"2020-12-28","2":"42428","3":"42417","_rn_":"2"},{"1":"2020-12-29","2":"92483","3":"92471","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChkZWxpdiB8PiBzZWxlY3QoMTozKSwgMylcbmBgYCJ9 -->
-<pre class="r"><code>head(deliv |&gt; select(1:3), 3)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZCh2YWNjKVxuYGBgIn0= -->
+<pre class="r"><code>head(vacc)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJvMVJ5MDdETUJEY3hERlZJbHFRK0k0RUNTNGNPVlI4QUFLcFY1TUh0ZXJZa2UycTlNWTM4a0dGZFdJallnNXdzR1ozc2p1enUzbGNiMjZMVFFFQUJMSTBBVUl4QlByODlGRGVBVEtZSkpCQjd2QU5pNjdHU2lBcmgvY2YxKyt1UE1hb2tkYUNHWVBCNVE4eVd6UGJJcDQ4VHp5ZjE2cm5Xako3L0FjeGIxMGN1R2pzY2ZnampZYVRyRzlOcEpRMWJqaHZ4L3VoTTFaMW5TZk92NG5mYXJsV2h5b29MdkdsL2lCa0trdy9vek1VNk1TcVRtUExkSXlaM0VJTmxpdUpZcWs3UEkyYUV4MFJGM3Zwekp1eTN1N2xycnh4QnVQbjZTMDlrbm5zTEVrWWpIcXBzMWErY2htT1FBVjdhWVZQVnJqa3VHTTFhQzV0MkFSWlUxbGxXYWdyYWlVQ00vM28weGVMdHF1amJ3SUFBQT09In0= -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6NzMsInN1bW1hcnkiOnsiRGVzY3JpcHRpb24iOlsiZGYgWzYgw5cgNzNdIl19fSwicmRmIjoiSDRzSUFBQUFBQUFBQnUyWVAyOFRNUmpHZlVuVDBvaW1TQ1VVTlMyMEEyVnFXcWhRMlJKQlZWRWtKRlNCNklBYVhYSyt4T1RpQy9ldlZhWU9JQVNmZ0lFQkJvWU9EQXd3ZFVCaVp1a0NFZ3g4QTNhR2dpOW5GMS9PdnJTaWFaZWVaTm54OHp1L3ordTcrQ3l2TEs3T3AxZlRBSUFrNkVzb0lKa2lUWkM2ZjI5cDVqb2dQZVNIQXZyQW9GOXZFR2lFTkpaSm5TRjFmM0ZuOXBPUEYzZm1BSzJMdE42a05kV3ZnT0FLRFppcUdLcHRrOFlacnJOdlVYVWdxWGRKR2ZLREFGQWl2OTl1QXdYZEJJbktVNUNjZmdtU0wzNXkra09pdnlmNkF0RTNpUDZjNk52NzE2WFhZZW1uU0Jta3haL3EwNlRrRHFEMzJwOUNpdjlna2x3Wk9JRGVhMytpSy9HZmVxLzluZWduK2hIcDNkYkhvNGkvOUFDQXo4OEErSDJEMU9Ram9kM2F2OTVyZjRmaC8xam10LzJSTGN3cjJwUE02RmloK0hGdUs3dnd1ckF5Kzg3NGNFMHBySDI1L1NhVG1DcG9kMy85ZUhWbnE2Qi9IL28yKzNXTjNSY3picS84bnVqSHFvYzNWMWh0UUxhNVdtYWJLODNmWEFYdFljMjBJUzdWM1lacnFBN3lhUGY1b0x1TVRPekFTaTJpVDNUbzBMS2RDSFNoQTJxdFE5U2QwaXprZEtjOEJLMG9OUnBRRFZPREZsWWo4bmhZRnBxZUNETml6eDJRMkhJSEpIYWNEU0RWZHF5bzN6RmVGTHJOOFlUWWF3Z1JPdzBoc1RQN3lLeGgyNHkrTCtOaE9XNW1HUk03c3d5S25Wa0d4VHJHcHFkNjZvYk1NWlBqSERNbTFqR0RZaDB6S05heHB4b1lldEszbDhseGpoa1Q2NWhCc1k0WkpIWTgxZkd2TENQQ1F4d0ZwMldnTUl2TE1scWNqeFFYWnliRnhUbE9odi9HMGhRdlNUaGhodE1TV0p5Z2pCYm5KNlBGNlowTmFLRkx1amlKVFZGUjdJR0s0cEIwV2RPUXJrTUw0bGFwNVRaS25tazVhcFVTRnpsVE1kZ2s3Njg3RjFqdHpnV3VZemo2Qm5tbVlkaU9DckdHcW5GNG5zdkd4ZnU5YTdSSmJqQ3g3Tm44ay8wQm80dkZucXk2dW00aFcvUVJqekpYSTlBd2FqVDEwbVBYZEdEYmlLRGJOMEM3UjlpamJVUUdvbEs5N0VXa2M0aE1ScDEwa01WY05SeG9sZHFzUUMxRHk5VkQ2amluTnFDR1dnaTNrK1daSE1jMGRRTldZUTBTaHp5U2pWamdrczFHSEhCaVRtS0FROGJFOFNVUmd2RGNwRWJEYzZJc1BJZEl3cmVKOEhaeDBETFg4MnpMNk84ekU1dkJwckkvQUJOL1FQaWNMazIya21wZXQ4Z3RvSDFhRnhwdXdHejZRY2xnQ2YvRU1OVnhzMkoxZEF5NzJBK3V6VlJxTHE3UCtNZUZhUkFjUENuVWtCS1kyV3N2QnlHVHpGaUtEdFVQY1JWaHRzdE5HV29ac3VuSWtDVGJPZWFiRnNMc0NhUkpyNTEzVEVkbFhMcGlHcXduT0luYy9RdUl2RzBxS0JVQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["dosen_kumulativ"],"name":[2],"type":["int"],"align":["right"]},{"label":["dosen_biontech_kumulativ"],"name":[3],"type":["int"],"align":["right"]},{"label":["dosen_biontech_erst_kumulativ"],"name":[4],"type":["int"],"align":["right"]},{"label":["dosen_biontech_zweit_kumulativ"],"name":[5],"type":["int"],"align":["right"]},{"label":["dosen_biontech_dritt_kumulativ"],"name":[6],"type":["int"],"align":["right"]},{"label":["dosen_biontech_viert_kumulativ"],"name":[7],"type":["int"],"align":["right"]},{"label":["dosen_moderna_kumulativ"],"name":[8],"type":["int"],"align":["right"]},{"label":["dosen_moderna_erst_kumulativ"],"name":[9],"type":["int"],"align":["right"]},{"label":["dosen_moderna_zweit_kumulativ"],"name":[10],"type":["int"],"align":["right"]},{"label":["dosen_moderna_dritt_kumulativ"],"name":[11],"type":["int"],"align":["right"]},{"label":["dosen_moderna_viert_kumulativ"],"name":[12],"type":["int"],"align":["right"]},{"label":["dosen_astra_kumulativ"],"name":[13],"type":["int"],"align":["right"]},{"label":["dosen_astra_erst_kumulativ"],"name":[14],"type":["int"],"align":["right"]},{"label":["dosen_astra_zweit_kumulativ"],"name":[15],"type":["int"],"align":["right"]},{"label":["dosen_astra_dritt_kumulativ"],"name":[16],"type":["int"],"align":["right"]},{"label":["dosen_astra_viert_kumulativ"],"name":[17],"type":["int"],"align":["right"]},{"label":["dosen_johnson_kumulativ"],"name":[18],"type":["int"],"align":["right"]},{"label":["dosen_johnson_erst_kumulativ"],"name":[19],"type":["int"],"align":["right"]},{"label":["dosen_johnson_zweit_kumulativ"],"name":[20],"type":["int"],"align":["right"]},{"label":["dosen_johnson_dritt_kumulativ"],"name":[21],"type":["int"],"align":["right"]},{"label":["dosen_johnson_viert_kumulativ"],"name":[22],"type":["int"],"align":["right"]},{"label":["dosen_novavax_kumulativ"],"name":[23],"type":["int"],"align":["right"]},{"label":["dosen_novavax_erst_kumulativ"],"name":[24],"type":["int"],"align":["right"]},{"label":["dosen_novavax_zweit_kumulativ"],"name":[25],"type":["int"],"align":["right"]},{"label":["dosen_novavax_dritt_kumulativ"],"name":[26],"type":["int"],"align":["right"]},{"label":["dosen_novavax_viert_kumulativ"],"name":[27],"type":["int"],"align":["right"]},{"label":["dosen_valneva_kumulativ"],"name":[28],"type":["int"],"align":["right"]},{"label":["dosen_valneva_erst_kumulativ"],"name":[29],"type":["int"],"align":["right"]},{"label":["dosen_valneva_zweit_kumulativ"],"name":[30],"type":["int"],"align":["right"]},{"label":["dosen_valneva_dritt_kumulativ"],"name":[31],"type":["int"],"align":["right"]},{"label":["dosen_valneva_viert_kumulativ"],"name":[32],"type":["int"],"align":["right"]},{"label":["dosen_biontech_bivalent_kumulativ"],"name":[33],"type":["int"],"align":["right"]},{"label":["dosen_biontech_bivalent_erst_kumulativ"],"name":[34],"type":["int"],"align":["right"]},{"label":["dosen_biontech_bivalent_zweit_kumulativ"],"name":[35],"type":["int"],"align":["right"]},{"label":["dosen_biontech_bivalent_dritt_kumulativ"],"name":[36],"type":["int"],"align":["right"]},{"label":["dosen_biontech_bivalent_viert_kumulativ"],"name":[37],"type":["int"],"align":["right"]},{"label":["dosen_moderna_bivalent_kumulativ"],"name":[38],"type":["int"],"align":["right"]},{"label":["dosen_moderna_bivalent_erst_kumulativ"],"name":[39],"type":["int"],"align":["right"]},{"label":["dosen_moderna_bivalent_zweit_kumulativ"],"name":[40],"type":["int"],"align":["right"]},{"label":["dosen_moderna_bivalent_dritt_kumulativ"],"name":[41],"type":["int"],"align":["right"]},{"label":["dosen_moderna_bivalent_viert_kumulativ"],"name":[42],"type":["int"],"align":["right"]},{"label":["dosen_erst_kumulativ"],"name":[43],"type":["int"],"align":["right"]},{"label":["dosen_zweit_kumulativ"],"name":[44],"type":["int"],"align":["right"]},{"label":["dosen_dritt_kumulativ"],"name":[45],"type":["int"],"align":["right"]},{"label":["dosen_viert_kumulativ"],"name":[46],"type":["int"],"align":["right"]},{"label":["dosen_differenz_zum_vortag"],"name":[47],"type":["int"],"align":["right"]},{"label":["dosen_erst_differenz_zum_vortag"],"name":[48],"type":["int"],"align":["right"]},{"label":["dosen_zweit_differenz_zum_vortag"],"name":[49],"type":["int"],"align":["right"]},{"label":["dosen_dritt_differenz_zum_vortag"],"name":[50],"type":["int"],"align":["right"]},{"label":["dosen_viert_differenz_zum_vortag"],"name":[51],"type":["int"],"align":["right"]},{"label":["dosen_vollstaendig_differenz_zum_vortag"],"name":[52],"type":["int"],"align":["right"]},{"label":["dosen_erst_unvollstaendig_differenz_zum_vortag"],"name":[53],"type":["int"],"align":["right"]},{"label":["personen_erst_kumulativ"],"name":[54],"type":["int"],"align":["right"]},{"label":["personen_voll_kumulativ"],"name":[55],"type":["int"],"align":["right"]},{"label":["personen_auffrisch_kumulativ"],"name":[56],"type":["int"],"align":["right"]},{"label":["personen_auffrisch2_kumulativ"],"name":[57],"type":["int"],"align":["right"]},{"label":["impf_quote_erst"],"name":[58],"type":["dbl"],"align":["right"]},{"label":["impf_quote_voll"],"name":[59],"type":["dbl"],"align":["right"]},{"label":["dosen_dim_kumulativ"],"name":[60],"type":["int"],"align":["right"]},{"label":["dosen_kbv_kumulativ"],"name":[61],"type":["int"],"align":["right"]},{"label":["indikation_alter_dosen"],"name":[62],"type":["int"],"align":["right"]},{"label":["indikation_beruf_dosen"],"name":[63],"type":["int"],"align":["right"]},{"label":["indikation_medizinisch_dosen"],"name":[64],"type":["int"],"align":["right"]},{"label":["indikation_pflegeheim_dosen"],"name":[65],"type":["int"],"align":["right"]},{"label":["indikation_alter_erst"],"name":[66],"type":["int"],"align":["right"]},{"label":["indikation_beruf_erst"],"name":[67],"type":["int"],"align":["right"]},{"label":["indikation_medizinisch_erst"],"name":[68],"type":["int"],"align":["right"]},{"label":["indikation_pflegeheim_erst"],"name":[69],"type":["int"],"align":["right"]},{"label":["indikation_alter_voll"],"name":[70],"type":["int"],"align":["right"]},{"label":["indikation_beruf_voll"],"name":[71],"type":["int"],"align":["right"]},{"label":["indikation_medizinisch_voll"],"name":[72],"type":["int"],"align":["right"]},{"label":["indikation_pflegeheim_voll"],"name":[73],"type":["int"],"align":["right"]}],"data":[{"1":"2020-12-27","2":"24421","3":"24412","4":"24412","5":"0","6":"0","7":"0","8":"8","9":"8","10":"0","11":"0","12":"0","13":"1","14":"1","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","25":"0","26":"0","27":"0","28":"0","29":"0","30":"0","31":"0","32":"0","33":"0","34":"0","35":"0","36":"0","37":"0","38":"0","39":"0","40":"0","41":"0","42":"0","43":"24421","44":"0","45":"0","46":"0","47":"24421","48":"24421","49":"0","50":"0","51":"0","52":"0","53":"24421","54":"24421","55":"0","56":"0","57":"0","58":"0.00029","59":"0","60":"0","61":"0","62":"0","63":"0","64":"0","65":"0","66":"0","67":"0","68":"0","69":"0","70":"0","71":"0","72":"0","73":"0","_rn_":"1"},{"1":"2020-12-28","2":"42428","3":"42417","4":"42417","5":"0","6":"0","7":"0","8":"9","9":"9","10":"0","11":"0","12":"0","13":"2","14":"2","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","25":"0","26":"0","27":"0","28":"0","29":"0","30":"0","31":"0","32":"0","33":"0","34":"0","35":"0","36":"0","37":"0","38":"0","39":"0","40":"0","41":"0","42":"0","43":"42428","44":"0","45":"0","46":"0","47":"18007","48":"18007","49":"0","50":"0","51":"0","52":"0","53":"18007","54":"42428","55":"0","56":"0","57":"0","58":"0.00051","59":"0","60":"0","61":"0","62":"0","63":"0","64":"0","65":"0","66":"0","67":"0","68":"0","69":"0","70":"0","71":"0","72":"0","73":"0","_rn_":"2"},{"1":"2020-12-29","2":"92483","3":"92471","4":"92471","5":"0","6":"0","7":"0","8":"9","9":"9","10":"0","11":"0","12":"0","13":"3","14":"3","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","25":"0","26":"0","27":"0","28":"0","29":"0","30":"0","31":"0","32":"0","33":"0","34":"0","35":"0","36":"0","37":"0","38":"0","39":"0","40":"0","41":"0","42":"0","43":"92483","44":"0","45":"0","46":"0","47":"50055","48":"50055","49":"0","50":"0","51":"0","52":"0","53":"50055","54":"92483","55":"0","56":"0","57":"0","58":"0.00111","59":"0","60":"0","61":"0","62":"0","63":"0","64":"0","65":"0","66":"0","67":"0","68":"0","69":"0","70":"0","71":"0","72":"0","73":"0","_rn_":"3"},{"1":"2020-12-30","2":"156549","3":"156536","4":"156536","5":"0","6":"0","7":"0","8":"10","9":"10","10":"0","11":"0","12":"0","13":"3","14":"3","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","25":"0","26":"0","27":"0","28":"0","29":"0","30":"0","31":"0","32":"0","33":"0","34":"0","35":"0","36":"0","37":"0","38":"0","39":"0","40":"0","41":"0","42":"0","43":"156549","44":"0","45":"0","46":"0","47":"64066","48":"64066","49":"0","50":"0","51":"0","52":"0","53":"64066","54":"156549","55":"0","56":"0","57":"0","58":"0.00188","59":"0","60":"0","61":"0","62":"0","63":"0","64":"0","65":"0","66":"0","67":"0","68":"0","69":"0","70":"0","71":"0","72":"0","73":"0","_rn_":"4"},{"1":"2020-12-31","2":"206488","3":"206473","4":"206473","5":"0","6":"0","7":"0","8":"12","9":"12","10":"0","11":"0","12":"0","13":"3","14":"3","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","25":"0","26":"0","27":"0","28":"0","29":"0","30":"0","31":"0","32":"0","33":"0","34":"0","35":"0","36":"0","37":"0","38":"0","39":"0","40":"0","41":"0","42":"0","43":"206488","44":"0","45":"0","46":"0","47":"49939","48":"49939","49":"0","50":"0","51":"0","52":"0","53":"49939","54":"206488","55":"0","56":"0","57":"0","58":"0.00248","59":"0","60":"0","61":"0","62":"0","63":"0","64":"0","65":"0","66":"0","67":"0","68":"0","69":"0","70":"0","71":"0","72":"0","73":"0","_rn_":"5"},{"1":"2021-01-01","2":"232160","3":"232124","4":"232124","5":"0","6":"0","7":"0","8":"27","9":"27","10":"0","11":"0","12":"0","13":"7","14":"7","15":"0","16":"0","17":"0","18":"2","19":"2","20":"0","21":"0","22":"0","23":"0","24":"0","25":"0","26":"0","27":"0","28":"0","29":"0","30":"0","31":"0","32":"0","33":"0","34":"0","35":"0","36":"0","37":"0","38":"0","39":"0","40":"0","41":"0","42":"0","43":"232160","44":"0","45":"0","46":"0","47":"25672","48":"25672","49":"0","50":"0","51":"0","52":"0","53":"25672","54":"232160","55":"0","56":"0","57":"0","58":"0.00279","59":"0","60":"0","61":"0","62":"0","63":"0","64":"0","65":"0","66":"0","67":"0","68":"0","69":"0","70":"0","71":"0","72":"0","73":"0","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[73]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChkZWxpdiB8PiBkcGx5cjo6c2VsZWN0KDE6MyksIDMpXG5gYGAifQ== -->
+<pre class="r"><code>head(deliv |&gt; dplyr::select(1:3), 3)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJvMVJ5MDdETUJEY3hERlZJbHFRK0k0RUlTNGNPVlI4QUFLcFY1TUh0ZXJZa2UycTlNWTM4a0dGZFdJallnNXdzR1ozc2p1enUzbGNiMjZMVFFFQUJMSTBBVUl4QlByODlGRGVBVEtZSkpCQjd2QU5pNjdHU2lBcmgvY2YxKyt1UE1hb2tkYUNHWVBCNVE4eVd6UGJJcDQ4VHp5ZjE2cm5Xako3L0FjeGIxMGN1R2pzY2ZnampZYVRyRzlOcEpRMWJqaHZ4L3VoTTFaMW5TZk92NG5mYXJsV2h5b29MdkdsL2lCa0trdy9vek1VNk1TcVRtUExkSXlaM0VJTmxpdUpZcWs3UEkyYUV4MFJGM3Zwekp1eTN1N2xycnh4QnVQbjZTMDlrbm5zTEVrWWpIcXBzMWErY2htT1FBVjdhWVZQVnJqa3VHTTFhQzV0MkFSWlUxbGxXYWdyYWlVQ00vM28weGZ0MEVrR2J3SUFBQT09In0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["impfstoff"],"name":[2],"type":["chr"],"align":["left"]},{"label":["impfstofftyp"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"2020-12-26","2":"comirnaty","3":"wildtyp","_rn_":"1"},{"1":"2020-12-26","2":"comirnaty","3":"wildtyp","_rn_":"2"},{"1":"2020-12-26","2":"comirnaty","3":"wildtyp","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZCh2YWNjU3RhdGUgfD4gc2VsZWN0KDE6MyksIDMpXG5gYGAifQ== -->
-<pre class="r"><code>head(vaccState |&gt; select(1:3), 3)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZCh2YWNjU3RhdGUgfD4gZHBseXI6OnNlbGVjdCgxOjMpLCAzKVxuYGBgIn0= -->
+<pre class="r"><code>head(vaccState |&gt; dplyr::select(1:3), 3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFTMDdETUJSOGlXTktJeFdLRUJ2T1FMSW9MQkRMS3EyUWtGaWdWdXFHaGVzWWlBaDI1TGpBc3ZmaEFqMEJoK0VRQmR1eFVXdExsdC9NODh6N1BCU0x5M1NSQWdDQ0pJNEFZUjBDbnMrbTJUVm9Sb01JRXVpYjkxTi9PclUvQVlhZHdpWndNY25HNDEwd2NhQm53UHkrME9IQUN1NStSckQrZW9UREsvam56bSsvNGVKbUEraHNHVlRFbkx5eE5xaVdVRkV5RjUrOEUwb3JUbFFsZURzVGl0UXVNV3lZYUdvMnJXU3JPbjdmdVMvRlIrN2RUUnZ4R3V4QllRdTBKcTF2d1pOcFNSVEpuNlRXYTdRTkpEM1IySDYwcWRrV0RzU1JESWpqRlRlZGxCbDlXZkhYYkdRSzJIUjNCKzVGKzdFcEdmODZLK3lzRGhoL3JyamZEcTdKa3ZtTkhPbUo3Y0I1SXl1dS9DU2FiWE8xczdtVWl0b3pkamJZL2dIdjZ5dGZKQUlBQUE9PSJ9 -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVF5MG9ETVJTOTgwaHJCNm9WMFlYZjRBeUlMZ1IzWlZvRXdZVzAwRzJhaVJxTXlUQ1Rxc3YralYvaHYvZ0RMdDFXazB3aWJRSWg5NXliYys3anZseGNaSXNNQUJKSTR3Z1NwRU5BODlrMHZ3TE5hQkJCQ2dQenZ1dFBSL1lud0toVDJBUXFKL2w0dkEwbUR2UU5tTitWT2h4YXdlM1BONncvUDJEdjh1U2ZPNzM1Z3JQckhpVEh5NkFpRXZpRnRrRzFsTWlLdXZqd0ZSUENCRlpNaW5ZbUZlWXVNYXFwckRtZHNxWlZIYi9yUEdqa1crSGRUUnZ4R3V4SndoWUl4NjF2d1pOWmhSVXVIaHF0MTJnVFNQcXl0djFvVTdNdEZJaWpKaUFPVnNKMFV1WGthU1dlODNOVHdLYTdPM1J2c2h1Ymt2R3ZzMExPcWtmRkl4TitPNGpqSmZVYjJkY1QyNEdMdW1GQytVazAyeFpxYTNNWmtkd3pkamJZL0FHVUlaeEFKQUlBQUE9PSJ9 -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["code"],"name":[1],"type":["chr"],"align":["left"]},{"label":["vaccinationsTotal"],"name":[2],"type":["int"],"align":["right"]},{"label":["peopleFirstTotal"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"DE-BB","2":"4975154","3":"1722566","_rn_":"1"},{"1":"DE-BE","2":"8432477","3":"2898616","_rn_":"2"},{"1":"DE-BUND","2":"537600","3":"202082","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["code"],"name":[1],"type":["chr"],"align":["left"]},{"label":["vaccinationsTotal"],"name":[2],"type":["int"],"align":["right"]},{"label":["peopleFirstTotal"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"DE-BB","2":"4978157","3":"1722592","_rn_":"1"},{"1":"DE-BE","2":"8437159","3":"2898694","_rn_":"2"},{"1":"DE-BUND","2":"537622","3":"202082","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -1810,10 +1820,94 @@ head(vacc |&gt; select(1:3), 3)</code></pre>
 <h3>3.2.1</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbnZhY2MyID0gdGliYmxlKHZhY2MpXG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmxpYnJhcnkodGlkeXIpXG52YWNjMiA9IGFzX3RpYmJsZSh2YWNjKSB8PiBkcGx5cjo6c2VsZWN0KDEsIDMsIDgsIDEzLCAxOCwgMjMsIDI4KSB8PiByZW5hbWUoRGF0dW0gPSBkYXRlKVxuZmlyc3RSb3cgPSBoZWFkKHZhY2MyLCAxKVxudmFjYzIgPSB2YWNjMiB8PiBtdXRhdGVfYXQoLnZhcnMgPSAyOjcsIC5mdW5zID0gZnVucyguIC1sYWcoLikpKVxudmFjYzJbMSxdID0gZmlyc3RSb3dcblxudmFjYzIgPSB2YWNjMiB8PiBwaXZvdF9sb25nZXIoXG4gICAgY29scyA9IGMoMjo3KSxcbiAgICBuYW1lc190byA9ICdIZXJzdGVsbGVyJyxcbiAgICB2YWx1ZXNfdG8gPSAnSW1wZmRvc2VuIHBybyBUYWcnLFxuICAgIG5hbWVzX3BhdHRlcm4gPSAnZG9zZW5fKFxcXFx3Kylfa3VtdWxhdGl2J1xuICApIHw+XG4gIGFycmFuZ2UoRGF0dW0sIEhlcnN0ZWxsZXIpXG5cbmtuaXRyOjprYWJsZSh0YWlsKHZhY2MyLCAxMCkpXG5gYGAifQ== -->
 <pre class="r"><code>library(dplyr)
-vacc2 = tibble(vacc)
-</code></pre>
+library(tidyr)
+vacc2 = as_tibble(vacc) |&gt; dplyr::select(1, 3, 8, 13, 18, 23, 28) |&gt; rename(Datum = date)
+firstRow = head(vacc2, 1)
+vacc2 = vacc2 |&gt; mutate_at(.vars = 2:7, .funs = funs(. -lag(.)))
+vacc2[1,] = firstRow
+
+vacc2 = vacc2 |&gt; pivot_longer(
+    cols = c(2:7),
+    names_to = &#39;Hersteller&#39;,
+    values_to = &#39;Impfdosen pro Tag&#39;,
+    names_pattern = &#39;dosen_(\\w+)_kumulativ&#39;
+  ) |&gt;
+  arrange(Datum, Hersteller)
+
+knitr::kable(tail(vacc2, 10))</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">Datum</th>
+<th align="left">Hersteller</th>
+<th align="right">Impfdosen pro Tag</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022-10-25</td>
+<td align="left">johnson</td>
+<td align="right">99</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-25</td>
+<td align="left">moderna</td>
+<td align="right">136</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-25</td>
+<td align="left">novavax</td>
+<td align="right">85</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-25</td>
+<td align="left">valneva</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-26</td>
+<td align="left">astra</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-26</td>
+<td align="left">biontech</td>
+<td align="right">3368</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-26</td>
+<td align="left">johnson</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-26</td>
+<td align="left">moderna</td>
+<td align="right">191</td>
+</tr>
+<tr class="odd">
+<td align="left">2022-10-26</td>
+<td align="left">novavax</td>
+<td align="right">94</td>
+</tr>
+<tr class="even">
+<td align="left">2022-10-26</td>
+<td align="left">valneva</td>
+<td align="right">63</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1822,13 +1916,17 @@ vacc2 = tibble(vacc)
 <h3>3.2.2</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QyKVxuXG5nZ3Bsb3QodmFjYzIpICtcbiAgZ2VvbV9saW5lKGFlcyh4PWRhdGUsIHk9J0ltcGZkb3NlbiBwcm8gVGFnJywgZ3JvdXA9SGVyc3RlbGxlcikpXG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QyKVxuXG5nZ3Bsb3QodmFjYzIpICtcbiAgZ2VvbV9saW5lKGFlcyh4PURhdHVtLCB5PUltcGZkb3NlbiBwcm8gVGFnLCBncm91cD1IZXJzdGVsbGVyKSlcbmBgYCJ9 -->
 <pre class="r"><code>library(ggplot2)
 
 ggplot(vacc2) +
-  geom_line(aes(x=date, y=&#39;Impfdosen pro Tag&#39;, group=Hersteller))
-</code></pre>
+  geom_line(aes(x=Datum, y=Impfdosen pro Tag, group=Hersteller))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IHVuZXhwZWN0ZWQgc3ltYm9sIGluOlxuXCJnZ3Bsb3QodmFjYzIpICtcbiAgZ2VvbV9saW5lKGFlcyh4PURhdHVtLCB5PUltcGZkb3NlbiBwcm9cIlxuIn0= -->
+<pre><code>Error: unexpected symbol in:
+&quot;ggplot(vacc2) +
+  geom_line(aes(x=Datum, y=Impfdosen pro&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1840,7 +1938,7 @@ ggplot(vacc2) +
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRlc3RhdCAxIEF1ZmdhYmUgMzogQ292aWQxOTogSW1wZmZvcnRzY2hyaXR0IGluIERldXRzY2hsYW5kIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyMgMy4xDQpgYGB7cn0NCnZhY2NGaWxlID0gdXJsKCdodHRwczovL2ltcGZkYXNoYm9hcmQuZGUvc3RhdGljL2RhdGEvZ2VybWFueV92YWNjaW5hdGlvbnNfdGltZXNlcmllc192Mi50c3YnKQ0KZGVsaXZGaWxlID0gdXJsKCdodHRwczovL2ltcGZkYXNoYm9hcmQuZGUvc3RhdGljL2RhdGEvZ2VybWFueV9kZWxpdmVyaWVzX3RpbWVzZXJpZXNfdjIudHN2JykNCnZhY2NTdGF0ZUZpbGUgPSB1cmwoJ2h0dHBzOi8vaW1wZmRhc2hib2FyZC5kZS9zdGF0aWMvZGF0YS9nZXJtYW55X3ZhY2NpbmF0aW9uc19ieV9zdGF0ZS50c3YnKQ0KDQp2YWNjID0gZGF0YS5mcmFtZShyZWFkLnRhYmxlKHZhY2NGaWxlLCBzZXA9J1x0JywgaGVhZGVyPVRSVUUpKQ0KZGVsaXYgPSBkYXRhLmZyYW1lKHJlYWQudGFibGUoZGVsaXZGaWxlLCBzZXA9J1x0JywgaGVhZGVyPVRSVUUpKQ0KdmFjY1N0YXRlID0gZGF0YS5mcmFtZShyZWFkLnRhYmxlKHZhY2NTdGF0ZUZpbGUsIHNlcD0nXHQnLCBoZWFkZXI9VFJVRSkpDQpgYGANCmBgYHtyfQ0KdmFjYyRkYXRlID0gYXMuRGF0ZSh2YWNjJGRhdGUsICclWS0lbS0lZCcpDQpkZWxpdiRkYXRlID0gYXMuRGF0ZShkZWxpdiRkYXRlLCAnJVktJW0tJWQnKQ0KDQpoZWFkKHZhY2MgfD4gc2VsZWN0KDE6MyksIDMpDQpoZWFkKGRlbGl2IHw+IHNlbGVjdCgxOjMpLCAzKQ0KaGVhZCh2YWNjU3RhdGUgfD4gc2VsZWN0KDE6MyksIDMpDQpgYGANCiMjIDMuMg0KIyMjIDMuMi4xDQpgYGB7cn0NCmxpYnJhcnkoZHBseXIpDQp2YWNjMiA9IHRpYmJsZSh2YWNjKQ0KDQpgYGANCiMjIyAzLjIuMg0KYGBge3J9DQpsaWJyYXJ5KGdncGxvdDIpDQoNCmdncGxvdCh2YWNjMikgKw0KICBnZW9tX2xpbmUoYWVzKHg9ZGF0ZSwgeT0nSW1wZmRvc2VuIHBybyBUYWcnLCBncm91cD1IZXJzdGVsbGVyKSkNCg0KYGBgDQojIyAzLjMNCmBgYHtyfQ0KDQoNCmBgYA==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRlc3RhdCAxIEF1ZmdhYmUgMzogQ292aWQxOTogSW1wZmZvcnRzY2hyaXR0IGluIERldXRzY2hsYW5kIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyMgMy4xDQpgYGB7cn0NCnZhY2NGaWxlID0gdXJsKCdodHRwczovL2ltcGZkYXNoYm9hcmQuZGUvc3RhdGljL2RhdGEvZ2VybWFueV92YWNjaW5hdGlvbnNfdGltZXNlcmllc192Mi50c3YnKQ0KZGVsaXZGaWxlID0gdXJsKCdodHRwczovL2ltcGZkYXNoYm9hcmQuZGUvc3RhdGljL2RhdGEvZ2VybWFueV9kZWxpdmVyaWVzX3RpbWVzZXJpZXNfdjIudHN2JykNCnZhY2NTdGF0ZUZpbGUgPSB1cmwoJ2h0dHBzOi8vaW1wZmRhc2hib2FyZC5kZS9zdGF0aWMvZGF0YS9nZXJtYW55X3ZhY2NpbmF0aW9uc19ieV9zdGF0ZS50c3YnKQ0KDQp2YWNjID0gZGF0YS5mcmFtZShyZWFkLnRhYmxlKHZhY2NGaWxlLCBzZXA9J1x0JywgaGVhZGVyPVRSVUUpKQ0KZGVsaXYgPSBkYXRhLmZyYW1lKHJlYWQudGFibGUoZGVsaXZGaWxlLCBzZXA9J1x0JywgaGVhZGVyPVRSVUUpKQ0KdmFjY1N0YXRlID0gZGF0YS5mcmFtZShyZWFkLnRhYmxlKHZhY2NTdGF0ZUZpbGUsIHNlcD0nXHQnLCBoZWFkZXI9VFJVRSkpDQpgYGANCmBgYHtyfQ0KdmFjYyRkYXRlID0gYXMuRGF0ZSh2YWNjJGRhdGUsICclWS0lbS0lZCcpDQpkZWxpdiRkYXRlID0gYXMuRGF0ZShkZWxpdiRkYXRlLCAnJVktJW0tJWQnKQ0KDQpoZWFkKHZhY2MgfD4gZHBseXI6OnNlbGVjdCgxOjMpLCAzKQ0KaGVhZCh2YWNjKQ0KaGVhZChkZWxpdiB8PiBkcGx5cjo6c2VsZWN0KDE6MyksIDMpDQpoZWFkKHZhY2NTdGF0ZSB8PiBkcGx5cjo6c2VsZWN0KDE6MyksIDMpDQpgYGANCiMjIDMuMg0KIyMjIDMuMi4xDQpgYGB7cn0NCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KHRpZHlyKQ0KdmFjYzIgPSBhc190aWJibGUodmFjYykgfD4gZHBseXI6OnNlbGVjdCgxLCAzLCA4LCAxMywgMTgsIDIzLCAyOCkgfD4gcmVuYW1lKERhdHVtID0gZGF0ZSkNCmZpcnN0Um93ID0gaGVhZCh2YWNjMiwgMSkNCnZhY2MyID0gdmFjYzIgfD4gbXV0YXRlX2F0KC52YXJzID0gMjo3LCAuZnVucyA9IGZ1bnMoLiAtbGFnKC4pKSkNCnZhY2MyWzEsXSA9IGZpcnN0Um93DQoNCnZhY2MyID0gdmFjYzIgfD4gcGl2b3RfbG9uZ2VyKA0KICAgIGNvbHMgPSBjKDI6NyksDQogICAgbmFtZXNfdG8gPSAnSGVyc3RlbGxlcicsDQogICAgdmFsdWVzX3RvID0gJ0ltcGZkb3NlbiBwcm8gVGFnJywNCiAgICBuYW1lc19wYXR0ZXJuID0gJ2Rvc2VuXyhcXHcrKV9rdW11bGF0aXYnDQogICkgfD4NCiAgYXJyYW5nZShEYXR1bSwgSGVyc3RlbGxlcikNCg0Ka25pdHI6OmthYmxlKHRhaWwodmFjYzIsIDEwKSkNCg0KYGBgDQojIyMgMy4yLjINCmBgYHtyfQ0KbGlicmFyeShnZ3Bsb3QyKQ0KDQpnZ3Bsb3QodmFjYzIpICsNCiAgZ2VvbV9saW5lKGFlcyh4PURhdHVtLCB5PSdJbXBmZG9zZW4gcHJvIFRhZycsIGdyb3VwPUhlcnN0ZWxsZXIpKQ0KDQpgYGANCiMjIDMuMw0KYGBge3J9DQoNCg0KYGBg</div>
 
 
 
