@@ -1,0 +1,39 @@
+---
+title: "Testat 1"
+output: html_notebook
+---
+
+## 2 Visualisierung von Datensätzen
+### 2.1 Körpergewicht und Gehirngewicht bei Säugetieren
+#### 2.1.1 Körpergewicht vs. Gehirngewicht
+```{r}
+#2.1.1
+#Import dataset mammals, add row numbers for better overview
+library(dplyr)
+mammals = MASS::mammals
+mammals = mutate(mammals, rownum=row_number())
+head(mammals)
+
+#Subset mammals to have better overview
+subset = c('Pig','Rat','African elephant','Chimpanzee','Cat','Human','Little brown bat')
+mammals_sub = mammals[rownames(mammals) %in% subset,]
+mammals_sub
+
+#Plot Körpergewicht vs. Gehirngewicht
+library(ggplot2)
+library(scales)
+
+plot1=ggplot(mammals) +
+geom_point(aes(x = body, y = brain)) + xlab('Körpergewicht (kg)') + ylab('Gehirngewicht (g)') + scale_x_log10() + scale_y_log10() 
+plot1 + 
+  annotate('text', x = 3.30, y = 25.60 ,label = 'Cat', color = 'blue') +
+  annotate('text', x = 62.00, y = 1320.00 ,label = 'Human', color = 'blue') +
+  annotate('text', x = 6654.00, y = 5712.00 ,label = 'African elephant', color = 'blue') +
+  annotate('text', x = 0.01, y = 0.25 ,label = 'Little brown bat', color = 'blue') +
+  annotate('text', x = 52.16, y = 440.00 ,label = 'Chimpanzee', color = 'blue') +
+  annotate('text', x = 0.28, y = 1.90 ,label = 'Rat', color = 'blue') +
+  annotate('text', x = 192.00, y = 180.00 ,label = 'Pig', color = 'blue')
+
+```
+
+
