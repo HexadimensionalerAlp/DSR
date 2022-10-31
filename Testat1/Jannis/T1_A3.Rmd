@@ -47,7 +47,7 @@ knitr::kable(tail(vacc2, 10))
 library(ggplot2)
 
 ggplot(vacc2) +
-  geom_line(aes(x=Datum, y='Impfdosen pro Tag', group=Hersteller))
+  geom_line(aes(x=Datum, y=`Impfdosen pro Tag`, group=Hersteller, color=Hersteller))
 
 ```
 ## 3.3
@@ -57,13 +57,12 @@ deliv2 = deliv |> group_by(date, impfstoff) |>
   dplyr::select(1, 2, 7) |>
   distinct(date, impfstoff, Liefermenge) |>
   mutate(impfstoff = case_when(impfstoff == 'comirnaty' ~ 'biontech', TRUE ~ impfstoff))
-# head(deliv2, 10)
 
 vacc_joined = vacc2 |> inner_join(deliv2, c('Datum' = 'date', 'Hersteller' = 'impfstoff'))
-head(vacc_joined, 10)
 
 ggplot(vacc_joined) +
-  geom_line(aes(x=Datum, y='Impfdosen pro Tag'), linetype = 'solid') +
-  geom_line(aes(x=Datum, y=Liefermenge), linetype = 'dashed') +
-  facet_wrap(~ Hersteller)
+  geom_line(aes(x=Datum, y=`Impfdosen pro Tag`, color='red'), linetype = 'solid') +
+  geom_line(aes(x=Datum, y=Liefermenge, color='blue'), linetype = 'dashed') +
+  facet_wrap(~ Hersteller) +
+  labs(title = 'Liefermenge und Impfungen', col = 'Impfdosen')
 ```

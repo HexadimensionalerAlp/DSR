@@ -1772,8 +1772,8 @@ pre code {
 <h2>1.1</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoibXloaXN0b2dyYW0gPSBmdW5jdGlvbih4LCBuPTEsIG1pbj1OQSwgbWF4PU5BKSB7XG4gICAgc29ydGVkID0gc29ydCh4KVxuICAgIG1pbj1pZmVsc2UoaXMubmEobWluKSwgbWluKHgpLCBtaW4pXG4gICAgbWF4PWlmZWxzZShpcy5uYShtYXgpLCBtYXgoeCkgKyAxLCBtYXgpXG5cbiAgICBzb3J0ZWROdW1iZXJzID0gc29ydGVkW3NvcnRlZCA+PSBtaW5dXG4gICAgc29ydGVkTnVtYmVycyA9IHNvcnRlZE51bWJlcnNbc29ydGVkTnVtYmVycyA8IG1heF1cblxuICAgIG91dHNpZGUgPSBzb3J0ZWRbc29ydGVkIDwgbWluXVxuICAgIG91dHNpZGUgPSBzb3J0ZWRbc29ydGVkID4gbWF4XVxuXG4gICAgaWYgKGxlbmd0aChvdXRzaWRlKSA+IDApIHtcbiAgICAgICAgd2FybmluZyhwYXN0ZTAoJ1phaGxlbiBhdcOfZXJoYWxiIHZvbiBJbnRlcnZhbGxncmVuemVuOiAnLCBwYXN0ZShvdXRzaWRlLCBjb2xsYXBzZSA9IFwiLCBcIikpKVxuICAgIH1cblxuICAgIGJvcmRlcnMgPSBzZXEobWluLCBtYXgsIGxlbmd0aC5vdXQ9bisxKVxuICAgIGNvdW50cyA9IHNhcHBseShzZXEoZnJvbT0xLCB0bz1uKSwgZnVuY3Rpb24oZSkge1xuICAgICAgICBtaW4gPSBib3JkZXJzW2VdXG4gICAgICAgIG1heCA9IGJvcmRlcnNbZSsxXVxuXG4gICAgICAgIGludGVydmFsbCA9IHNvcnRlZE51bWJlcnNbc29ydGVkTnVtYmVycyA+PSBtaW5dXG4gICAgICAgIGludGVydmFsbCA9IGludGVydmFsbFtpbnRlcnZhbGwgPCBtYXhdXG5cbiAgICAgICAgbGVuZ3RoKGludGVydmFsbClcbiAgICB9KVxuXG4gICAgbGlzdChib3JkZXJzLCBjb3VudHMpXG59In0= -->
-<pre class="r"><code>myhistogram = function(x, n=1, min=NA, max=NA) {
+<!-- rnb-source-begin eyJkYXRhIjoibXloaXN0b2dyYW0gPSBmdW5jdGlvbih4LCBuPTMwLCBtaW49TkEsIG1heD1OQSkge1xuICAgIHNvcnRlZCA9IHNvcnQoeClcbiAgICBtaW49aWZlbHNlKGlzLm5hKG1pbiksIG1pbih4KSwgbWluKVxuICAgIG1heD1pZmVsc2UoaXMubmEobWF4KSwgbWF4KHgpICsgMSwgbWF4KVxuXG4gICAgc29ydGVkTnVtYmVycyA9IHNvcnRlZFtzb3J0ZWQgPj0gbWluXVxuICAgIHNvcnRlZE51bWJlcnMgPSBzb3J0ZWROdW1iZXJzW3NvcnRlZE51bWJlcnMgPCBtYXhdXG5cbiAgICBvdXRzaWRlID0gc29ydGVkW3NvcnRlZCA8IG1pbl1cbiAgICBvdXRzaWRlID0gc29ydGVkW3NvcnRlZCA+IG1heF1cblxuICAgIGlmIChsZW5ndGgob3V0c2lkZSkgPiAwKSB7XG4gICAgICAgIHdhcm5pbmcocGFzdGUwKCdaYWhsZW4gYXXDn2VyaGFsYiB2b24gSW50ZXJ2YWxsZ3JlbnplbjogJywgcGFzdGUob3V0c2lkZSwgY29sbGFwc2UgPSBcIiwgXCIpKSlcbiAgICB9XG5cbiAgICBib3JkZXJzID0gc2VxKG1pbiwgbWF4LCBsZW5ndGgub3V0PW4rMSlcbiAgICBjb3VudHMgPSBzYXBwbHkoc2VxKGZyb209MSwgdG89biksIGZ1bmN0aW9uKGUpIHtcbiAgICAgICAgbWluID0gYm9yZGVyc1tlXVxuICAgICAgICBtYXggPSBib3JkZXJzW2UrMV1cblxuICAgICAgICBpbnRlcnZhbGwgPSBzb3J0ZWROdW1iZXJzW3NvcnRlZE51bWJlcnMgPj0gbWluXVxuICAgICAgICBpbnRlcnZhbGwgPSBpbnRlcnZhbGxbaW50ZXJ2YWxsIDwgbWF4XVxuXG4gICAgICAgIGxlbmd0aChpbnRlcnZhbGwpXG4gICAgfSlcblxuICAgIGxpc3QoYm9yZGVycywgY291bnRzKVxufSJ9 -->
+<pre class="r"><code>myhistogram = function(x, n=30, min=NA, max=NA) {
     sorted = sort(x)
     min=ifelse(is.na(min), min(x), min)
     max=ifelse(is.na(max), max(x) + 1, max)
@@ -1847,6 +1847,18 @@ myhistogram(x, n = 5, min = -10, max = 10)</code></pre>
 <h3>1.2.3</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbInggPSBzZXEoLTUsIDUsIGJ5ID0gMSAvIDUpIiwibXloaXN0b2dyYW0oeCwgbiA9IDcsIG1pbiA9IC0xMCwgbWF4ID0gMTApIl19 -->
+<pre class="r"><code>x = seq(-5, 5, by = 1 / 5)
+myhistogram(x, n = 7, min = -10, max = 10)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cblsxXSAtMTAuMDAwMDAwICAtNy4xNDI4NTcgIC00LjI4NTcxNCAgLTEuNDI4NTcxICAgMS40Mjg1NzEgICA0LjI4NTcxNCAgIDcuMTQyODU3XG5bOF0gIDEwLjAwMDAwMFxuXG5bWzJdXVxuWzFdICAwICA0IDE0IDE1IDE0ICA0ICAwXG4ifQ== -->
+<pre><code>[[1]]
+[1] -10.000000  -7.142857  -4.285714  -1.428571   1.428571   4.285714   7.142857
+[8]  10.000000
+
+[[2]]
+[1]  0  4 14 15 14  4  0</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1854,6 +1866,18 @@ myhistogram(x, n = 5, min = -10, max = 10)</code></pre>
 <h3>1.2.4</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbInggPSBzZXEoLTEwMCwgMTAwLCBieSA9IDEpIiwibXloaXN0b2dyYW0oeCwgbiA9IDE1KSJdfQ== -->
+<pre class="r"><code>x = seq(-100, 100, by = 1)
+myhistogram(x, n = 15)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cbiBbMV0gLTEwMC4wICAtODYuNiAgLTczLjIgIC01OS44ICAtNDYuNCAgLTMzLjAgIC0xOS42ICAgLTYuMiAgICA3LjIgICAyMC42XG5bMTFdICAgMzQuMCAgIDQ3LjQgICA2MC44ICAgNzQuMiAgIDg3LjYgIDEwMS4wXG5cbltbMl1dXG4gWzFdIDE0IDEzIDE0IDEzIDEzIDE0IDEzIDE0IDEzIDEzIDE0IDEzIDE0IDEzIDEzXG4ifQ== -->
+<pre><code>[[1]]
+ [1] -100.0  -86.6  -73.2  -59.8  -46.4  -33.0  -19.6   -6.2    7.2   20.6
+[11]   34.0   47.4   60.8   74.2   87.6  101.0
+
+[[2]]
+ [1] 14 13 14 13 13 14 13 14 13 13 14 13 14 13 13</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1861,6 +1885,26 @@ myhistogram(x, n = 5, min = -10, max = 10)</code></pre>
 <h3>1.2.5</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbInggPSBzZXEoLTEwLCAxMSwgYnkgPSAxIC8gNSkiLCJteWhpc3RvZ3JhbSh4LCBtaW4gPSAtMTAsIG1heCA9IDEwKSJdfQ== -->
+<pre class="r"><code>x = seq(-10, 11, by = 1 / 5)
+myhistogram(x, min = -10, max = 10)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-warning-begin eyJkYXRhIjoiV2FybmluZyBpbiBteWhpc3RvZ3JhbSh4LCBtaW4gPSAtMTAsIG1heCA9IDEwKTogWmFobGVuIGF1w59lcmhhbGIgdm9uXG5JbnRlcnZhbGxncmVuemVuOiAxMC4yLCAxMC40LCAxMC42LCAxMC44LCAxMVxuIn0= -->
+<pre><code>Warning in myhistogram(x, min = -10, max = 10): Zahlen außerhalb von
+Intervallgrenzen: 10.2, 10.4, 10.6, 10.8, 11</code></pre>
+<!-- rnb-warning-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cbiBbMV0gLTEwLjAwMDAwMDAgIC05LjMzMzMzMzMgIC04LjY2NjY2NjcgIC04LjAwMDAwMDAgIC03LjMzMzMzMzMgIC02LjY2NjY2NjdcbiBbN10gIC02LjAwMDAwMDAgIC01LjMzMzMzMzMgIC00LjY2NjY2NjcgIC00LjAwMDAwMDAgIC0zLjMzMzMzMzMgIC0yLjY2NjY2NjdcblsxM10gIC0yLjAwMDAwMDAgIC0xLjMzMzMzMzMgIC0wLjY2NjY2NjcgICAwLjAwMDAwMDAgICAwLjY2NjY2NjcgICAxLjMzMzMzMzNcblsxOV0gICAyLjAwMDAwMDAgICAyLjY2NjY2NjcgICAzLjMzMzMzMzMgICA0LjAwMDAwMDAgICA0LjY2NjY2NjcgICA1LjMzMzMzMzNcblsyNV0gICA2LjAwMDAwMDAgICA2LjY2NjY2NjcgICA3LjMzMzMzMzMgICA4LjAwMDAwMDAgICA4LjY2NjY2NjcgICA5LjMzMzMzMzNcblszMV0gIDEwLjAwMDAwMDBcblxuW1syXV1cbiBbMV0gNCAzIDMgNCAzIDMgNCAzIDMgNCAzIDMgNCAzIDMgNCAzIDMgNCAzIDMgNCAzIDMgNCAzIDMgNCAzIDNcbiJ9 -->
+<pre><code>[[1]]
+ [1] -10.0000000  -9.3333333  -8.6666667  -8.0000000  -7.3333333  -6.6666667
+ [7]  -6.0000000  -5.3333333  -4.6666667  -4.0000000  -3.3333333  -2.6666667
+[13]  -2.0000000  -1.3333333  -0.6666667   0.0000000   0.6666667   1.3333333
+[19]   2.0000000   2.6666667   3.3333333   4.0000000   4.6666667   5.3333333
+[25]   6.0000000   6.6666667   7.3333333   8.0000000   8.6666667   9.3333333
+[31]  10.0000000
+
+[[2]]
+ [1] 4 3 3 4 3 3 4 3 3 4 3 3 4 3 3 4 3 3 4 3 3 4 3 3 4 3 3 4 3 3</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1895,7 +1939,7 @@ ggplot(df) +
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGVzdGF0IDEgQXVmZ2FiZSAxOiBIaXN0b2dyYW1tIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyAxLjEKCmBgYHtyfQpteWhpc3RvZ3JhbSA9IGZ1bmN0aW9uKHgsIG49MSwgbWluPU5BLCBtYXg9TkEpIHsKICAgIHNvcnRlZCA9IHNvcnQoeCkKICAgIG1pbj1pZmVsc2UoaXMubmEobWluKSwgbWluKHgpLCBtaW4pCiAgICBtYXg9aWZlbHNlKGlzLm5hKG1heCksIG1heCh4KSArIDEsIG1heCkKCiAgICBzb3J0ZWROdW1iZXJzID0gc29ydGVkW3NvcnRlZCA+PSBtaW5dCiAgICBzb3J0ZWROdW1iZXJzID0gc29ydGVkTnVtYmVyc1tzb3J0ZWROdW1iZXJzIDwgbWF4XQoKICAgIG91dHNpZGUgPSBzb3J0ZWRbc29ydGVkIDwgbWluXQogICAgb3V0c2lkZSA9IHNvcnRlZFtzb3J0ZWQgPiBtYXhdCgogICAgaWYgKGxlbmd0aChvdXRzaWRlKSA+IDApIHsKICAgICAgICB3YXJuaW5nKHBhc3RlMCgnWmFobGVuIGF1w59lcmhhbGIgdm9uIEludGVydmFsbGdyZW56ZW46ICcsIHBhc3RlKG91dHNpZGUsIGNvbGxhcHNlID0gIiwgIikpKQogICAgfQoKICAgIGJvcmRlcnMgPSBzZXEobWluLCBtYXgsIGxlbmd0aC5vdXQ9bisxKQogICAgY291bnRzID0gc2FwcGx5KHNlcShmcm9tPTEsIHRvPW4pLCBmdW5jdGlvbihlKSB7CiAgICAgICAgbWluID0gYm9yZGVyc1tlXQogICAgICAgIG1heCA9IGJvcmRlcnNbZSsxXQoKICAgICAgICBpbnRlcnZhbGwgPSBzb3J0ZWROdW1iZXJzW3NvcnRlZE51bWJlcnMgPj0gbWluXQogICAgICAgIGludGVydmFsbCA9IGludGVydmFsbFtpbnRlcnZhbGwgPCBtYXhdCgogICAgICAgIGxlbmd0aChpbnRlcnZhbGwpCiAgICB9KQoKICAgIGxpc3QoYm9yZGVycywgY291bnRzKQp9CmBgYAoKIyMgMS4yCiMjIyAxLjIuMQpgYGB7cn0KeCA9IHNlcSgtNSwgNiwgYnkgPSAxIC8gMykKbXloaXN0b2dyYW0oeCwgbiA9IDEwLCBtaW4gPSAtNSwgbWF4ID0gNikKYGBgCiMjIyAxLjIuMgpgYGB7cn0KeCA9IHNlcSgtNSwgNiwgYnkgPSAxIC8gMykKbXloaXN0b2dyYW0oeCwgbiA9IDUsIG1pbiA9IC0xMCwgbWF4ID0gMTApCmBgYAojIyMgMS4yLjMKYGBge3J9CgpgYGAKIyMjIDEuMi40CmBgYHtyfQoKYGBgCiMjIyAxLjIuNQpgYGB7cn0KCmBgYAojIyAxLjMKYGBge3J9CmxpYnJhcnkoZ2dwbG90MikKCnNldC5zZWVkKDEpCnggPSBybm9ybSgwLCAxLCBuID0gMTAwMCkKaCA9IG15aGlzdG9ncmFtKHgsIG4gPSA1KQppID0gc2FwcGx5KHNlcShmcm9tPTEsIHRvPWxlbmd0aChoW1sxXV0pLTEpLCBmdW5jdGlvbihlKSB7CiAgICAgICAgbG93ZXIgPSBoW1sxXV1bZV0KICAgICAgICB1cHBlciA9IGhbWzFdXVtlKzFdCgogICAgICAgIChsb3dlciArIHVwcGVyKSAvIDIKICAgIH0pCmRmID0gZGF0YS5mcmFtZShJbnRlcnZhbGxzPWksIEZyZXF1ZW5jaWVzPWhbWzJdXSkKY29sbmFtZXMoZGYpID0gYygnSW50ZXJ2YWxscycsICdGcmVxdWVuY2llcycpCgpnZ3Bsb3QoZGYpICsKICAgIGdlb21fYmFyKGFlcyh4PUludGVydmFsbHMsIHk9RnJlcXVlbmNpZXMpLCBzdGF0PSJpZGVudGl0eSIsIHBvc2l0aW9uPSJkb2RnZSIpCgpgYGAKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGVzdGF0IDEgQXVmZ2FiZSAxOiBIaXN0b2dyYW1tIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyAxLjEKCmBgYHtyfQpteWhpc3RvZ3JhbSA9IGZ1bmN0aW9uKHgsIG49MzAsIG1pbj1OQSwgbWF4PU5BKSB7CiAgICBzb3J0ZWQgPSBzb3J0KHgpCiAgICBtaW49aWZlbHNlKGlzLm5hKG1pbiksIG1pbih4KSwgbWluKQogICAgbWF4PWlmZWxzZShpcy5uYShtYXgpLCBtYXgoeCkgKyAxLCBtYXgpCgogICAgc29ydGVkTnVtYmVycyA9IHNvcnRlZFtzb3J0ZWQgPj0gbWluXQogICAgc29ydGVkTnVtYmVycyA9IHNvcnRlZE51bWJlcnNbc29ydGVkTnVtYmVycyA8IG1heF0KCiAgICBvdXRzaWRlID0gc29ydGVkW3NvcnRlZCA8IG1pbl0KICAgIG91dHNpZGUgPSBzb3J0ZWRbc29ydGVkID4gbWF4XQoKICAgIGlmIChsZW5ndGgob3V0c2lkZSkgPiAwKSB7CiAgICAgICAgd2FybmluZyhwYXN0ZTAoJ1phaGxlbiBhdcOfZXJoYWxiIHZvbiBJbnRlcnZhbGxncmVuemVuOiAnLCBwYXN0ZShvdXRzaWRlLCBjb2xsYXBzZSA9ICIsICIpKSkKICAgIH0KCiAgICBib3JkZXJzID0gc2VxKG1pbiwgbWF4LCBsZW5ndGgub3V0PW4rMSkKICAgIGNvdW50cyA9IHNhcHBseShzZXEoZnJvbT0xLCB0bz1uKSwgZnVuY3Rpb24oZSkgewogICAgICAgIG1pbiA9IGJvcmRlcnNbZV0KICAgICAgICBtYXggPSBib3JkZXJzW2UrMV0KCiAgICAgICAgaW50ZXJ2YWxsID0gc29ydGVkTnVtYmVyc1tzb3J0ZWROdW1iZXJzID49IG1pbl0KICAgICAgICBpbnRlcnZhbGwgPSBpbnRlcnZhbGxbaW50ZXJ2YWxsIDwgbWF4XQoKICAgICAgICBsZW5ndGgoaW50ZXJ2YWxsKQogICAgfSkKCiAgICBsaXN0KGJvcmRlcnMsIGNvdW50cykKfQpgYGAKCiMjIDEuMgojIyMgMS4yLjEKYGBge3J9CnggPSBzZXEoLTUsIDYsIGJ5ID0gMSAvIDMpCm15aGlzdG9ncmFtKHgsIG4gPSAxMCwgbWluID0gLTUsIG1heCA9IDYpCmBgYAojIyMgMS4yLjIKYGBge3J9CnggPSBzZXEoLTUsIDYsIGJ5ID0gMSAvIDMpCm15aGlzdG9ncmFtKHgsIG4gPSA1LCBtaW4gPSAtMTAsIG1heCA9IDEwKQpgYGAKIyMjIDEuMi4zCmBgYHtyfQp4ID0gc2VxKC01LCA1LCBieSA9IDEgLyA1KQpteWhpc3RvZ3JhbSh4LCBuID0gNywgbWluID0gLTEwLCBtYXggPSAxMCkKYGBgCiMjIyAxLjIuNApgYGB7cn0KeCA9IHNlcSgtMTAwLCAxMDAsIGJ5ID0gMSkKbXloaXN0b2dyYW0oeCwgbiA9IDE1KQpgYGAKIyMjIDEuMi41CmBgYHtyfQp4ID0gc2VxKC0xMCwgMTEsIGJ5ID0gMSAvIDUpCm15aGlzdG9ncmFtKHgsIG1pbiA9IC0xMCwgbWF4ID0gMTApCmBgYAojIyAxLjMKYGBge3J9CmxpYnJhcnkoZ2dwbG90MikKCnNldC5zZWVkKDEpCnggPSBybm9ybSgwLCAxLCBuID0gMTAwMCkKaCA9IG15aGlzdG9ncmFtKHgsIG4gPSA1KQppID0gc2FwcGx5KHNlcShmcm9tPTEsIHRvPWxlbmd0aChoW1sxXV0pLTEpLCBmdW5jdGlvbihlKSB7CiAgICAgICAgbG93ZXIgPSBoW1sxXV1bZV0KICAgICAgICB1cHBlciA9IGhbWzFdXVtlKzFdCgogICAgICAgIChsb3dlciArIHVwcGVyKSAvIDIKICAgIH0pCmRmID0gZGF0YS5mcmFtZShJbnRlcnZhbGxzPWksIEZyZXF1ZW5jaWVzPWhbWzJdXSkKY29sbmFtZXMoZGYpID0gYygnSW50ZXJ2YWxscycsICdGcmVxdWVuY2llcycpCgpnZ3Bsb3QoZGYpICsKICAgIGdlb21fYmFyKGFlcyh4PUludGVydmFsbHMsIHk9RnJlcXVlbmNpZXMpLCBzdGF0PSJpZGVudGl0eSIsIHBvc2l0aW9uPSJkb2RnZSIpCgpgYGAKCgo=</div>
 
 
 

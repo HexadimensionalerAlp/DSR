@@ -28,7 +28,7 @@ knitr::kable(bottom)
 ```{r}
 rabbits = MASS::Rabbit
 ggplot(rabbits) +
-  geom_line(aes(x=BPchange, y=Dose)) +
+  geom_line(aes(x=Dose, y=BPchange), color='red') +
   facet_wrap(~ Treatment + Animal, ncol = 5)
 ```
 ### 2.2.2
