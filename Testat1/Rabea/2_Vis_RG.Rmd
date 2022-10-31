@@ -13,7 +13,9 @@ library(dplyr)
 mammals = MASS::mammals
 mammals = mutate(mammals, rownum=row_number())
 head(mammals)
+```
 
+```{r}
 #Subset mammals to have better overview
 subset = c('Pig','Rat','African elephant','Chimpanzee','Cat','Human','Little brown bat')
 mammals_sub = mammals[rownames(mammals) %in% subset,]
@@ -33,22 +35,40 @@ plot1 +
   annotate('text', x = 52.16, y = 440.00 ,label = 'Chimpanzee', color = 'blue') +
   annotate('text', x = 0.28, y = 1.90 ,label = 'Rat', color = 'blue') +
   annotate('text', x = 192.00, y = 180.00 ,label = 'Pig', color = 'blue')
-
+```
+#### 2.1.2 Gehirn- zu Körpergewicht-Verhältnis
+```{r}
 #2.1.2
 #Geben Sie diejenigen 10 Tiere als Tabelle im Notebook aus, die das größte Gehirn- zu Körpergewicht-Verhältnis r haben. Die Liste soll nach r absteigend sortiert sein und den Tiernamen und r enthalten
 
 mammals = transform(mammals, r = brain / body)
-mammals
 
 mammals_r = data.frame(rownames(mammals),mammals$r)
 mammals_r = mammals_r[order(mammals_r$mammals.r, decreasing = TRUE),]
-mammals_r = head(mammals_r,10)
-mammals_r
+knitr::kable(head(mammals_r,10))
+
 
 #Geben Sie nun – wie eben – diejenigen 10 Tiere als Tabelle aus, die das kleinste Gehirn- zu Körpergewicht-Verhältnis r haben. Die Liste soll nach r absteigend sortiert sein.
 
-mammals_r2 = tail(mammals_r,10)
-mammals_r2
+knitr::kable(tail(mammals_r,10))
 ```
+### 2.2 Blutdruckveränderung bei Medikamentengabe im Tierversuch
+```{r}
+rabbit = MASS::Rabbit
+rabbit
+
+#2.2.1
+#Plotten Sie im folgenden Chunk den Verlauf der Blutdruckveränderung (y-Achse) bei gegebener Dosis Phenylbiguanide (x-Achse). Dies soll in einem Diagramm mit Unterdiagrammen erfolgen: ein Unterdiagramm zeigt den Verlauf für je ein Kaninchen und der Behandlung (Placebo oder MDL 72222).
+
+ggplot(rabbit) +
+  geom_line(aes(x = Dose, y = BPchange),color = 'blue',linetype = 'solid') + facet_wrap(~ Treatment + Animal, ncol = 5)
+
+```
+#### 2.2.2 Boxplots der Blutdruckänderung je Dosis
+```{r}
+#2.2.2
+#Erzeugen Sie ein Diagramm, das in zwei Unterdiagrammen für die Placebo- und die MLD-Gruppe Boxplots erstellt. Die Boxplots geben die Verteilung der Blutdruckänderung je Dosis an. In Anlehnung an das obige Diagramm sollen die Boxplots vertikal ausgerichtet sein.
 
 
+
+```
