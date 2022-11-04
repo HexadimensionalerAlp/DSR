@@ -7,16 +7,19 @@ output: html_notebook
 ### 2.1.1
 ```{r}
 library(ggplot2)
+library(dplyr)
 animals = MASS::mammals
+animalLabels = c('Pig', 'Rat', 'African elephant', 'Chimpanzee', 'Cat', 'Human', 'Little brown bat')
+labeledAnimals = animals |> dplyr::filter(rownames(animals) %in% animalLabels)
 ggplot(animals) +
   geom_point(aes(x=body, y=brain)) +
   labs(x='Körpergewicht (kg)', y='Gehirngewicht (g)', ) +
   scale_x_log10() +
-  scale_y_log10()
+  scale_y_log10() +
+  geom_text(aes(x=labeledAnimals[,1], y=labeledAnimals[,2], label=rownames(labeledAnimals)))
 ```
 ### 2.1.2
 ```{r}
-library(dplyr)
 brainWeightRatioDf = animals |> mutate(r=brain / body) |> dplyr::select(r) |> arrange(-r)
 top = brainWeightRatioDf |> head(10)
 bottom = brainWeightRatioDf |> tail(10)
