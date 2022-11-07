@@ -10,13 +10,12 @@ library(ggplot2)
 library(dplyr)
 animals = MASS::mammals
 animalLabels = c('Pig', 'Rat', 'African elephant', 'Chimpanzee', 'Cat', 'Human', 'Little brown bat')
-labeledAnimals = animals |> dplyr::filter(rownames(animals) %in% animalLabels)
-ggplot(animals) +
-  geom_point(aes(x=body, y=brain)) +
+ggplot(animals,aes(x=body, y=brain)) +
+  geom_point() +
   labs(x='Körpergewicht (kg)', y='Gehirngewicht (g)', ) +
   scale_x_log10() +
   scale_y_log10() +
-  geom_text(aes(x=labeledAnimals[,1], y=labeledAnimals[,2], label=rownames(labeledAnimals)))
+  geom_text(aes(label=ifelse(rownames(animals) %in% animalLabels, rownames(animals), '')), color='blue')
 ```
 ### 2.1.2
 ```{r}

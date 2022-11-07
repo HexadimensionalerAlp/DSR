@@ -17,9 +17,9 @@ vaccState = data.frame(read.table(vaccStateFile, sep='\t', header=TRUE))
 vacc$date = as.Date(vacc$date, '%Y-%m-%d')
 deliv$date = as.Date(deliv$date, '%Y-%m-%d')
 
-head(vacc |> dplyr::select(1:3), 3)
-head(deliv |> dplyr::select(1:3), 3)
-head(vaccState |> dplyr::select(1:3), 3)
+vacc[1:3, 1:3]
+deliv[1:3, 1:3]
+vaccState[1:3, 1:3]
 ```
 ## 3.2
 ### 3.2.1
@@ -28,7 +28,7 @@ library(dplyr)
 library(tidyr)
 vacc_reduced = as_tibble(vacc) |> dplyr::select(1, 3, 8, 13, 18, 23, 28) |> rename(Datum = date)
 firstRow = head(vacc_reduced, 1)
-vacc2 = vacc_reduced |> mutate_at(.vars = 2:7, .funs = list(~ . -lag(.)))
+vacc2 = vacc_reduced |> mutate_at(.vars = 2:7, .funs = list(~ . - lag(.)))
 vacc2[1,] = firstRow
 
 vacc2 = vacc2 |> pivot_longer(
@@ -36,8 +36,7 @@ vacc2 = vacc2 |> pivot_longer(
     names_to = 'Hersteller',
     values_to = 'Impfdosen pro Tag',
     names_pattern = 'dosen_(\\w+)_kumulativ'
-  ) |>
-  arrange(Datum, Hersteller)
+  )
 
 knitr::kable(tail(vacc2, 10))
 
@@ -59,6 +58,8 @@ deliv2 = deliv |> group_by(date, impfstoff) |>
   mutate(impfstoff = case_when(impfstoff == 'comirnaty' ~ 'biontech', TRUE ~ impfstoff))
 
 vacc_joined = vacc2 |> inner_join(deliv2, c('Datum' = 'date', 'Hersteller' = 'impfstoff'))
+
+head(vacc_joined, 10)
 
 ggplot(vacc_joined) +
   geom_line(aes(x=Datum, y=`Impfdosen pro Tag`, color='red'), linetype = 'solid') +
