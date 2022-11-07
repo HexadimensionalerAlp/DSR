@@ -1,0 +1,144 @@
+---
+title: "Impfungen"
+output: html_notebook
+---
+
+```{r echo = F, warning = F, message = F}
+# Benötigte Libraries
+
+library(ggplot2)
+library(dplyr)
+library(knitr)
+
+```
+
+# Covid19: Impffortschritt in Deutschland
+
+In dieser Aufgabe geht es um den Verlauf der Corona-Impfungen in Deutschland. Die folgenden URLs enthalten Daten ab 2020:
+
+-   <https://impfdashboard.de/static/data/germany_vaccinations_timeseries_v2.tsv>
+-   <https://impfdashboard.de/static/data/germany_deliveries_timeseries_v2.tsv>
+-   <https://impfdashboard.de/static/data/germany_vaccinations_by_state.tsv>
+
+Sie sind der Webseite <https://impfdashboard.de> entnommen.
+
+## Einlesen der Daten
+
+Lesen Sie die drei Dateien je in einen Data Frame ein mit den Variablennamen:
+
+-   `vacc`
+-   `deliv`
+-   `vaccState`
+
+Wandeln Sie die Datums- und Zeitangaben von einem String in ein R-Datumsobjekt um. Geben Sie die ersten drei Zeilen und Spalten dieser Data Frames aus.
+
+```{r}
+# Ihre Lösung:
+# germany_vaccinations_timeseries_v2.tsv in Variable vacc
+# germany_deliveries_timeseries_v2.tsv in Variable deliv
+# germany_vaccinations_by_state.tsv in Variable vaccState
+
+ 
+vacc = read.table('https://impfdashboard.de/static/data/germany_vaccinations_timeseries_v2.tsv', sep='\t', header=T)
+
+deliv = read.table('https://impfdashboard.de/static/data/germany_deliveries_timeseries_v2.tsv', sep='\t', header=T)
+
+vaccState = read.table('https://impfdashboard.de/static/data/germany_vaccinations_by_state.tsv', sep='\t', header=T)
+ 
+deliv$date = as.Date(deliv$date)
+vacc$date = as.Date(vacc$date)
+
+
+kable(head(vacc[c(1,2,3)], n=3))
+kable(head(deliv[c(1,2,3)], n=3))
+kable(head(vaccState[c(1,2,3)], n=3))
+```
+
+## Verimpfte Impfdosen pro Tag
+
+Es soll untersucht werden, wie oft welcher Impfstoff an welchem Tag verimpft wurde.
+
+### Transformation
+
+Der Data Frame `vacc` enthält leider keine Angaben, wie oft ein Impfstoff eines Herstellers täglich verabreicht wurde. Erzeugen Sie aus `vacc` einen neuen Data Frame `vacc2`, der die folgende Struktur hat:
+
+| Datum    | Hersteller | Impfdosen pro Tag |
+|----------|------------|-------------------|
+| 09.04.21 | biontech   | 123456            |
+| 09.04.21 | moderna    | 12345             |
+| ...      | ...        | ...               |
+
+: Neue Struktur: Data Frame `vacc2`.
+
+Wie Sie die Impfstoffe (biontech, moderna, astra) nennen, bleibt Ihnen überlassen -- solange die Bezeichnungen konsistent und schlüssig sind.
+
+Geben Sie die letzten Zeilen von `vacc2` als `kable` aus. Tipp: `tail` gibt die letzten Zeilen eines Data Frames an (analog zu `head`).
+
+```{r}
+# Ihre Lösung:
+data_set_size = length(vacc$date)
+
+astra = (c(vacc$dosen_astra_kumulativ,0)-c(0,vacc$dosen_astra_kumulativ))[1:data_set_size]
+
+comirnaty = (c(vacc$dosen_biontech_kumulativ,0)-c(0,vacc$dosen_biontech_kumulativ))[1:data_set_size]
+
+johnson = (c(vacc$dosen_johnson_kumulativ,0)-c(0,vacc$dosen_johnson_kumulativ))[1:data_set_size]
+
+moderna = (c(vacc$dosen_moderna_kumulativ,0)-c(0,vacc$dosen_moderna_kumulativ))[1:data_set_size]
+novavax = (c(vacc$dosen_novavax_kumulativ,0)-c(0,vacc$dosen_novavax_kumulativ))[1:data_set_size]
+valneva = (c(vacc$dosen_valneva_kumulativ,0)-c(0,vacc$dosen_valneva_kumulativ))[1:data_set_size]
+
+vacc2 = data.frame(Datum=as.Date(vacc$date, "%d.%m.%Y"), Hersteller=rep(c('astra', 'comirnaty', 'johnson', 'moderna','novavax','valneva'),each=data_set_size), "Impfdosen am Tag"=c(astra,comirnaty, johnson, moderna, novavax, valneva))
+
+
+vacc2 = vacc2[order(vacc2$Datum),]
+kable(tail(vacc2, n=10))
+```
+
+### Plot der täglichen Impfdosen nach Hersteller
+
+Plotten Sie mit *ggplot* den Verlauf der täglichen Impfdosen für jeden Hersteller. Die *x*-Achse zeigt das Datum und die *y*-Achse die Anzahl der Impfdosen pro Tag. Überlegen Sie, welcher Diagrammtyp dafür am besten geeignet ist.
+
+```{r}
+# Ihre Lösung:
+ggplot(vacc2) + geom_line(aes(x=Datum, y=Impfdosen.am.Tag, group=Hersteller, color=Hersteller))
+
+```
+
+## Zeitverzug Auslieferung bis Verimpfung
+
+Es soll untersucht werden, wie schnell gelieferte Impfmengen der einzelnen Impfstoffe auch verimpft wurden.
+
+Es bietet sich dafür an, die akkumulierten Impfdosen mit den akkumulierten Impflieferungen zeitlich plotten. Je größer die Lücke zwischen der Liefermenge und der Impfungen ist, desto mehr Impfstoff blieb liegen. Die Graphik soll Angaben für ganz Deutschland und nicht für die einzelnen Bundesländer zeigen.
+
+Hinweis: Auch hier ist eine Vorverarbeitung der Daten nötig.
+
+Plotten Sie dies mit *ggplot*:
+
+```{r}
+# Ihre Lösung:
+## gelieferte Dosen bis zum heutigen Tag vervollständigen
+## - besonders für Astra relevant, da Lieferstopp
+last = deliv2 |>
+    group_by(impfstoff) |>
+    slice_max('order_by'=date, n = 1)
+last$date = Sys.Date()
+deliv3 = rbind(deliv2, last)
+## ende
+
+ggplot() +
+  geom_line(aes(x=as.Date(date), y=ave(dosen, impfstoff, FUN=cumsum) , group=impfstoff, color=impfstoff), linetype='dashed', data=deliv3) +
+  labs(x="Datum", y='Dosen') +
+  geom_line(aes(x=as.Date(Datum, '%d.%m.%Y'), y=ave(Impfdosen.am.Tag, Hersteller, FUN=cumsum), group=Hersteller, color=Hersteller), data=vacc2)+
+  
+  geom_line(aes(x=Sys.Date(), y=0, linetype=factor(lt)), data=data.frame(lt=1:2)) +
+scale_linetype_manual(values=c('solid', 'dashed'), name ='Linetype', labels=c('verimpft','geliefert'))
+
+
+#+ scale_y_continuous(trans='sqrt')
+##wurzelskala zieht die unteren Ergebnisse auseinander und macht es so ein bisschen anschaulicher
+
+  
+ 
+ 
+```
