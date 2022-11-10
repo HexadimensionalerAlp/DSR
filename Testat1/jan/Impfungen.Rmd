@@ -117,6 +117,9 @@ Plotten Sie dies mit *ggplot*:
 
 ```{r}
 # Ihre Lösung:
+
+deliv2 = data.frame(deliv |> group_by(impfstoff, date) |> summarise(dosen = sum(dosen)))
+
 ## gelieferte Dosen bis zum heutigen Tag vervollständigen
 ## - besonders für Astra relevant, da Lieferstopp
 last = deliv2 |>
