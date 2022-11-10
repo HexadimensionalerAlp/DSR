@@ -69,6 +69,8 @@ ggplot(rabbit) +
 #2.2.2
 #Erzeugen Sie ein Diagramm, das in zwei Unterdiagrammen für die Placebo- und die MLD-Gruppe Boxplots erstellt. Die Boxplots geben die Verteilung der Blutdruckänderung je Dosis an. In Anlehnung an das obige Diagramm sollen die Boxplots vertikal ausgerichtet sein.
 
-
+ggplot(rabbit) +
+  geom_boxplot(aes(x=Dose, y=BPchange,group=Animal))+
+  facet_wrap (~ Treatment)
 
 ```
