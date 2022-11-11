@@ -1,0 +1,110 @@
+---
+title: "Eigenes Histogramm"
+output: html_document
+---
+
+# Eigenes Histogramm
+
+Es soll ein eigenes Histogramm erzeugt werden. Der Dateiname für das Skript ist `myhistogram.R`.
+
+## Funktion `myhistogram`
+
+Programmieren Sie in R die Funktion `myhistogram`, die als Parameter `x` einen Vektor aus Zahlen erhält. Die Zahlen werden in `n` Intervalle einsortiert, und es wird gezählt, wie oft eine Zahl in einem Intervall vorkommt. Der Rückgabewert ist eine Liste mit den Einträgen `borders`, die die $n+1$ Intervallgrenzen enthalten und `counts`, der die Anzahlen enthält.
+
+ * Die $n$ Intervalle sollen gleich groß sein ($\Delta b$), d.h. für die Intervallgrenzen $b_1, b_2, \ldots, b_{n+1}$ gilt $\frac{b_{i+1}-b_{i}}{n}=\Delta b$ für $i=1, 2, \ldots n$.
+ * Die äußeren Grenzen $b_1$ und $b_n$ sollen als optionale Parametern `min` und `max` an die Funktion übergeben werden. Werte aus `x`, die zu keinem Intervall gehören, sollen ignoriert werden. Es wird aber eine Warnung ausgegeben, die sagt, welche Zahlen außerhalb des Bereichs liegen.
+ * Eine Zahl $z$ gehört zum $i$-ten Intervall, falls $b_i \leq z < b_{i+1}$ gilt.
+
+Bis auf `x` sollen alle Parameter optional sein. Überlegen Sie sinnvolle Default-Werte.
+
+Es ist natürlich **nicht** erlaubt, in der eigenen Funktion andere Funktionen zu nutzen, die ein Histogramm erzeugen.
+
+Hier ein Beispiel:
+```{r eval = F}
+myhistogram = function(x, n=30, min=NA, max=NA) {
+    sorted = sort(x)
+    min=ifelse(is.na(min), min(x), min)
+    max=ifelse(is.na(max), max(x) + 1, max)
+
+    sortedNumbers = sorted[sorted >= min]
+    sortedNumbers = sortedNumbers[sortedNumbers < max]
+
+    outside = sorted[sorted < min]
+    outside = sorted[sorted > max]
+
+    if (length(outside) > 0) {
+        warning(paste0('Zahl(en) außerhalb von Intervallgrenzen: ', paste(outside, collapse = ", ")))
+    }
+
+    borders = seq(min, max, length.out=n+1)
+    counts = sapply(seq(from=1, to=n), function(e) {
+        min = borders[e]
+        max = borders[e+1]
+
+        intervall = sortedNumbers[sortedNumbers >= min]
+        intervall = intervall[intervall < max]
+
+        length(intervall)
+    })
+
+    list(borders, counts)
+}
+```
+
+## 1.2
+### 1.2.1
+Es wird eine Warnung ausgeben:
+```
+## Warning in myhistogram(x, n = 10, min = -5, max = 6): Zahl(en) außerhalb
+## Intervallgrenzen: 6
+```
+```{r}
+x = seq(-5, 6, by = 1 / 3)
+myhistogram(x, n = 10, min = -5, max = 6)
+```
+### 1.2.2
+```{r}
+x = seq(-5, 6, by = 1 / 3)
+myhistogram(x, n = 5, min = -10, max = 10)
+```
+### 1.2.3
+```{r}
+x = seq(-5, 5, by = 1 / 5)
+myhistogram(x, n = 7, min = -10, max = 10)
+```
+### 1.2.4
+```{r}
+x = seq(-100, 100, by = 1)
+myhistogram(x, n = 15)
+```
+### 1.2.5
+```{r}
+x = seq(-10, 11, by = 1 / 5)
+myhistogram(x, min = -10, max = 10)
+```
+## Barplot
+
+Nutzen Sie Ihre Funktion `myhistogram` und erzeugen Sie einen Barplot mit _ggplot_. Die _x_-Achse zeigt dabei die Mitte des Intervalls und die _y_-Achse die Anzahl der Elemente in dieser Klasse.
+
+Tipp: Der Parameter `stat` von `geom_bar` ist wichtig.
+
+Vervollständigen Sie den Chunk. Die Kommentare sollen zu Anweisungen umgewandelt werden:
+
+```{r}
+library(ggplot2)
+
+set.seed(1)
+x = rnorm(0, 1, n = 1000)
+h = myhistogram(x, n = 5)
+i = sapply(seq(from=1, to=length(h[[1]])-1), function(e) {
+        lower = h[[1]][e]
+        upper = h[[1]][e+1]
+
+        (lower + upper) / 2
+    })
+df = data.frame(Intervalls=i, Frequencies=h[[2]])
+colnames(df) = c('Intervalls', 'Frequencies')
+
+ggplot(df) +
+    geom_bar(aes(x=Intervalls, y=Frequencies), stat="identity", position="dodge")
+```
