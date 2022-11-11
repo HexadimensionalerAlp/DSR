@@ -1,0 +1,44 @@
+---
+title: "COVID"
+author: "Rabea Götz"
+date: "2022-11-06"
+output: html_document
+---
+
+```{r}
+#3.1 Einlesen der Daten
+vacc= read.table(file = 'https://impfdashboard.de/static/data/germany_vaccinations_timeseries_v2.tsv', sep = '\t', header = TRUE)
+deliv= read.table(file = 'https://impfdashboard.de/static/data/germany_deliveries_timeseries_v2.tsv', sep = '\t', header = TRUE)
+vaccState= read.table(file = 'https://impfdashboard.de/static/data/germany_vaccinations_by_state.tsv', sep = '\t', header = TRUE)
+```
+
+
+```{r}
+library(knitr)
+vacc$date = as.Date(vacc$date, "%Y-%m-%d")
+kable(vacc[1:3,1:3])
+
+deliv$date = as.Date(deliv$date, "%Y-%m-%d")
+kable(deliv[1:3,1:3])
+```
+
+```{r}
+#3.2 Verimpfte Impfdosen pro Tag
+#3.2.1 Transformation
+library(dplyr)
+library(tidyr)
+vacc2 = vacc[,c(1,3,8,13,18,23,28)]
+vacc2 = rename(vacc2,Datum=date)
+first_row = head(vacc2, 1)
+vacc2 = mutate_at(vacc2, .vars=2:7, .funs = list(~ . - lag(.)))
+vacc2[1,]=first_row
+
+vacc2=pivot_longer(vacc2, cols = c(2:7), names_to = 'Hersteller', values_to = 'Impfdosen pro Tag', names_pattern = 'dosen_(\\w+)_kumulativ')
+kable(tail(vacc2,10))
+```
+```{r}
+#3.2.2 Plot der täglichen Impfdosen nach Hersteller
+library(ggplot2)
+ggplot(vacc2) +
+geom_line(aes(x=Datum,y=`Impfdosen pro Tag`,group = Hersteller, colour= Hersteller))
+```
