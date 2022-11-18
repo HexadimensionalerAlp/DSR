@@ -1,0 +1,120 @@
+---
+title: "Unüberwachtes Lernen mit dem Herz-Datensatz"
+output: html_document
+---
+
+```{r echo = F, warning = F, message = F}
+# Laden Sie benötigte Libraries...
+```
+
+# Clustering und PCA auf die Herzdaten
+
+## Einlesen der Herz-Daten
+
+Es werden wieder die Herzdaten aus der letzten Aufgabe genutzt. Lesen Sie diese als Data Frame ein.
+
+```{r}
+# Ihre Lösung:
+```
+
+## Bedeutet "ähnliche Merkmale" auch "gleiche Diagnose"?
+
+Für jeden Datensatz ist bekannt, zu welcher Klasse er gehört: 0 (gesund) und 1 (erkrankt). Wir wollen untersuchen, wie gut _ähnliche_ Datensätze zur gleichen Klasse gehören. Dafür soll mit dem $k$-means-Clusterverfahren der Datensatz in zwei Cluster eingeteilt werden.
+
+### Nur reelle Merkmale
+
+Zunächst sollen **nur die nummerischen Merkmale** benutzt werden und nicht jene, die Faktoren sind.
+
+#### Clustering
+
+Clustern Sie diese Daten. Überlegen Sie, ob Sie die Daten standardisieren wollen.
+
+```{r}
+# Ihre Lösung:
+```
+
+#### Richtig?
+
+Berechnen Sie, wie viel Prozent der Datensätze richtig einem Cluster eingeordnet wurden und geben Sie die Zahl auf zwei Nachkommastellen gerundet aus.
+
+Hinweis: Berücksichtigen Sie, dass die Vergabe der Clusternummern zufällig ist. D.h. sowohl die Cluster (1, 2) wie auch (2, 1) sind möglich.
+
+```{r}
+# Ihre Lösung:
+```
+
+#### Scatterplot age vs. thalach
+
+Plotten Sie die Merkmale `age` und `thalach` als Scatterplot. Färben Sie die Punkte gemäß ihrer Clusterzuordnung ein. Die Form (`shape`) eines Punkts soll zeigen, ob die Klassifikation (d.h. der Cluster) richtig oder falsch ist.
+
+```{r}
+# Ihre Lösung:
+```
+
+
+### Mit Dummy-Variablen
+
+Nun sollen **alle Merkmale** benutzt werden.
+
+#### Clustering
+
+Clustern Sie diese Daten. Überlegen Sie, wie die Faktoren zu Zahlen werden.
+
+```{r}
+# Ihre Lösung:
+```
+
+#### Richtig?
+
+Berechnen Sie für diesen Fall, wie viel Prozent der Datensätze richtig einem Cluster eingeordnet wurden und geben Sie die Zahl auf zwei Nachkommastellen gerundet aus. Wie hat sich der Wert verändert? Warum ist dies so?
+
+```{r}
+# Ihre Lösung:
+```
+
+#### Scatterplot age vs. thalach
+
+Plotten Sie erneut und schauen Sie, wie die richtigen nun Punkte verteilt sind.
+
+```{r}
+# Ihre Lösung:
+```
+
+## PCA
+
+Wenden Sie eine PCA auf diesen Datensatz an. Es sollen alle Merkmale berücksichtigt werden.
+
+### Wichtige Merkmale
+
+Welche Merkmale der ersten Hauptkomponente tragen am meisten zu der Varianz bei? Geben Sie die TOP 10 Merkmale an.
+
+```{r}
+# Ihre Lösung:
+```
+
+### Erste und zweite Hauptkomponente
+
+Plotten Sie die erste und zweite Hauptkomponente als Scatterplot. Färben Sie die Punkte gemäß ihrer Klasse (Disease) ein.
+
+```{r}
+# Ihre Lösung:
+```
+
+### PVE
+
+#### Plot
+
+Plotten Sie die Proportion of Variance explained (PVE) für jede Hauptkomponente sowie die akkumulierte PVE.
+
+```{r echo=F}
+# Ihre Lösung
+```
+
+#### Wichtige Hauptkomponenten
+
+Wie viele Hauptkomponenten erklären mehr als 50% der Varianz?
+
+
+Möglicherweise tragen bei Ihrem Ergebnis die letzten Hauptkomponenten keine Varianz mehr bei. Überlegen Sie, woran das liegen könnte.
+
+
