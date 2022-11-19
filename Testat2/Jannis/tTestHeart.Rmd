@@ -49,7 +49,7 @@ Lesen Sie die Datei aus der URL als Data Frame zur weiteren Bearbeitung ein. Üb
 ```{r}
 # Ihre Lösung:
 file = url('https://oc.informatik.hs-mannheim.de/s/wyzFq34K9HiNjXR/download')
-df = data.frame(read.csv(file, sep=',', header=TRUE))
+df = data.frame(read.csv(file, sep = ',', header = TRUE, stringsAsFactors = TRUE))
 df$sex = factor(df$sex)
 df$goal = factor(df$goal)
 
