@@ -1,0 +1,161 @@
+---
+title: "Unüberwachtes Lernen mit dem Herz-Datensatz"
+output: html_document
+---
+
+```{r echo = F, warning = F, message = F}
+library(ggplot2)
+library(dplyr)
+# Laden Sie benötigte Libraries...
+```
+
+# Clustering und PCA auf die Herzdaten
+
+## Einlesen der Herz-Daten
+
+Es werden wieder die Herzdaten aus der letzten Aufgabe genutzt. Lesen Sie diese als Data Frame ein.
+
+```{r}
+# Ihre Lösung:
+file = url('https://oc.informatik.hs-mannheim.de/s/wyzFq34K9HiNjXR/download')
+df = data.frame(read.csv(file, sep = ',', header = TRUE, stringsAsFactors = TRUE))
+df$sex = factor(df$sex)
+df$goal = factor(df$goal)
+```
+
+## Bedeutet "ähnliche Merkmale" auch "gleiche Diagnose"?
+
+Für jeden Datensatz ist bekannt, zu welcher Klasse er gehört: 0 (gesund) und 1 (erkrankt). Wir wollen untersuchen, wie gut _ähnliche_ Datensätze zur gleichen Klasse gehören. Dafür soll mit dem $k$-means-Clusterverfahren der Datensatz in zwei Cluster eingeteilt werden.
+
+### Nur reelle Merkmale
+
+Zunächst sollen **nur die nummerischen Merkmale** benutzt werden und nicht jene, die Faktoren sind.
+
+#### Clustering
+
+Clustern Sie diese Daten. Überlegen Sie, ob Sie die Daten standardisieren wollen.
+
+```{r}
+# Ihre Lösung:
+df_scaled = scale(df |> select_if(is.numeric))
+clustered_km = stats::kmeans(df_scaled, centers = 2)
+```
+
+#### Richtig?
+
+Berechnen Sie, wie viel Prozent der Datensätze richtig einem Cluster eingeordnet wurden und geben Sie die Zahl auf zwei Nachkommastellen gerundet aus.
+
+Hinweis: Berücksichtigen Sie, dass die Vergabe der Clusternummern zufällig ist. D.h. sowohl die Cluster (1, 2) wie auch (2, 1) sind möglich.
+
+```{r}
+# Ihre Lösung:
+calculate_percentage_correct = function (goal, cluster) {
+  goal = sapply(goal, function(x) if (x == 0) 0 else 1)
+  goal_class_1 = goal[1]
+  goal_class_2 = 1 - goal_class_1
+  cluster_class_1 = cluster[1]
+  mapped_cluster = sapply(cluster, function(x) if (x == cluster_class_1) goal_class_1 else goal_class_2)
+  difference = abs(goal - mapped_cluster)
+  proportion_correct = 1 - sum(difference) / length(difference)
+  percentage_correct = proportion_correct * 100
+  return(list(percentage = round(percentage_correct, 2), difference = difference))
+}
+
+result = calculate_percentage_correct(df$goal, clustered_km$cluster)
+result$percentage
+```
+
+#### Scatterplot age vs. thalach
+
+Plotten Sie die Merkmale `age` und `thalach` als Scatterplot. Färben Sie die Punkte gemäß ihrer Clusterzuordnung ein. Die Form (`shape`) eines Punkts soll zeigen, ob die Klassifikation (d.h. der Cluster) richtig oder falsch ist.
+
+```{r}
+# Ihre Lösung:
+ggplot(df) +
+  geom_point(aes(age, thalach), color = clustered_km$cluster, shape = result$difference) +
+  scale_color_manual(values = c('red', 'blue')) + 
+  scale_shape_manual(values = c(19, 20))
+```
+
+
+### Mit Dummy-Variablen
+
+Nun sollen **alle Merkmale** benutzt werden.
+
+#### Clustering
+
+Clustern Sie diese Daten. Überlegen Sie, wie die Faktoren zu Zahlen werden.
+
+```{r}
+# Ihre Lösung:
+df_transformed = fastDummies::dummy_columns(df) |> select_if(is.numeric)
+df_all_scaled = scale(df_transformed)
+clustered_all_km = stats::kmeans(df_all_scaled, centers = 2)
+```
+
+#### Richtig?
+
+Berechnen Sie für diesen Fall, wie viel Prozent der Datensätze richtig einem Cluster eingeordnet wurden und geben Sie die Zahl auf zwei Nachkommastellen gerundet aus. Wie hat sich der Wert verändert? Warum ist dies so?
+
+```{r}
+# Ihre Lösung:
+result_all = calculate_percentage_correct(df$goal, clustered_all_km$cluster)
+result_all$percentage
+```
+Der Wert ist deutlich höher als bei der vorherigen Zuweisung.
+
+#### Scatterplot age vs. thalach
+
+Plotten Sie erneut und schauen Sie, wie die richtigen Punkte nun verteilt sind. Die nun hinzugenommenen Merkmale scheinen also von Bedeutung für die Zuordnung zu sein und folglich vermutlich mit der Erkrankung zusammenzuhängen.
+
+```{r}
+# Ihre Lösung:
+ggplot(df) +
+  geom_point(aes(age, thalach), color = clustered_all_km$cluster, shape = result_all$difference) +
+  scale_color_manual(values = c('red', 'blue')) + 
+  scale_shape_manual(values = c(19, 20))
+```
+
+## PCA
+
+Wenden Sie eine PCA auf diesen Datensatz an. Es sollen alle Merkmale berücksichtigt werden.
+
+### Wichtige Merkmale
+
+Welche Merkmale der ersten Hauptkomponente tragen am meisten zu der Varianz bei? Geben Sie die TOP 10 Merkmale an.
+
+```{r}
+# Ihre Lösung:
+df_transformed_pca = fastDummies::dummy_columns(df) |> select_if(is.numeric)
+pca = stats::prcomp(df_transformed_pca, scale = TRUE)
+pca
+```
+
+### Erste und zweite Hauptkomponente
+
+Plotten Sie die erste und zweite Hauptkomponente als Scatterplot. Färben Sie die Punkte gemäß ihrer Klasse (Disease) ein.
+
+```{r}
+# Ihre Lösung:
+ggplot(data.frame(pca$rotation)) +
+  geom_point(aes(PC1, PC2))
+```
+
+### PVE
+
+#### Plot
+
+Plotten Sie die Proportion of Variance explained (PVE) für jede Hauptkomponente sowie die akkumulierte PVE.
+
+```{r echo=F}
+# Ihre Lösung
+```
+
+#### Wichtige Hauptkomponenten
+
+Wie viele Hauptkomponenten erklären mehr als 50% der Varianz?
+
+
+Möglicherweise tragen bei Ihrem Ergebnis die letzten Hauptkomponenten keine Varianz mehr bei. Überlegen Sie, woran das liegen könnte.
+
+

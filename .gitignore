@@ -1,1 +1,5 @@
 .vscode
+.Rproj.user
+.Rhistory
+.DS_Store
+.RData
