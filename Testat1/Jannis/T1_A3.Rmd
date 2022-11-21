@@ -55,15 +55,17 @@ deliv2 = deliv |> group_by(date, impfstoff) |>
   mutate(Liefermenge = sum(dosen)) |>
   dplyr::select(1, 2, 7) |>
   distinct(date, impfstoff, Liefermenge) |>
+  mutate(Liefermenge = cumsum(Liefermenge)) |>
   mutate(impfstoff = case_when(impfstoff == 'comirnaty' ~ 'biontech', TRUE ~ impfstoff))
 
-vacc_joined = vacc2 |> inner_join(deliv2, c('Datum' = 'date', 'Hersteller' = 'impfstoff'))
+# mit kumuliertem Datensatz joinen, NA Einträge mit vorherigem Eintrag überschreiben, wenn
+# vorheriger Datensatz NA, dann 0
+vacc_joined = vacc2 |> full_join(deliv2, c('Datum' = 'date', 'Hersteller' = 'impfstoff'))
 
 head(vacc_joined, 10)
 
 ggplot(vacc_joined) +
-  geom_line(aes(x=Datum, y=`Impfdosen pro Tag`, color='red'), linetype = 'solid') +
-  geom_line(aes(x=Datum, y=Liefermenge, color='blue'), linetype = 'dashed') +
-  facet_wrap(~ Hersteller) +
+  geom_line(aes(x=Datum, y=`Impfdosen pro Tag`, group=Hersteller, color=Hersteller), linetype = 'solid') +
+  geom_line(aes(x=Datum, y=Liefermenge, group=Hersteller, color=Hersteller), linetype = 'dashed') +
   labs(title = 'Liefermenge und Impfungen', col = 'Impfdosen')
 ```

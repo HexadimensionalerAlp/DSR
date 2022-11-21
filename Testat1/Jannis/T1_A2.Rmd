@@ -36,6 +36,7 @@ ggplot(rabbits) +
 ### 2.2.2
 ```{r}
 ggplot(rabbits) +
-  geom_boxplot(aes(x=Dose, y=BPchange, group=Animal)) +
+  geom_boxplot(aes(x=factor(Dose), y=BPchange, group=Dose)) +
+  xlab('Dose') +
   facet_wrap(~ Treatment)
 ```
