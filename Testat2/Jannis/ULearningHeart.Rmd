@@ -128,7 +128,7 @@ Welche Merkmale der ersten Hauptkomponente tragen am meisten zu der Varianz bei?
 # Ihre Lösung:
 df_transformed_pca = fastDummies::dummy_columns(df) |> select_if(is.numeric)
 pca = stats::prcomp(df_transformed_pca, scale = TRUE)
-pca
+sort(abs(pca$rotation[1:10, 'PC1']), decreasing = TRUE)
 ```
 
 ### Erste und zweite Hauptkomponente
@@ -137,8 +137,8 @@ Plotten Sie die erste und zweite Hauptkomponente als Scatterplot. Färben Sie di
 
 ```{r}
 # Ihre Lösung:
-ggplot(data.frame(pca$rotation)) +
-  geom_point(aes(PC1, PC2))
+ggplot(data.frame(pca$x)) +
+  geom_point(aes(PC1, PC2), color = df$goal)
 ```
 
 ### PVE
