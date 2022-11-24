@@ -25,20 +25,17 @@ Welche Verteilung Sie für $X_i$ nehmen, bleibt Ihnen überlassen. Es soll nur k
 set.seed(42)
 mu = 0
 sigma = 1
-N = c(1, 2, 3)#, 10, 100, 1000)
+N = c(1, 2, 3, 10, 100, 1000)
 columns = list()
 
 for (n in N) {
   l = sapply(1:n, function(x) {
-    print(x)
-    runif(n=100)
+    runif(n=50000)
   })
-  G = cbind(l)
-  # print(G)
-  columns = append(columns, G)
-  #columns = append(columns, (G - mu) / sigma)
+  columns = append(columns, (rowSums(l) - mu) / sigma)
 }
-# head(data.frame(columns[[1]], columns[[2]], columns[[3]]))
+print(dim(columns))
+# head(as.data.frame(columns))
 ```
 
 ## Plot
