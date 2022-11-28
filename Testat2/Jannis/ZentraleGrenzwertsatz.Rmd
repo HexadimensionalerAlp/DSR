@@ -28,14 +28,14 @@ sigma = 1
 N = c(1, 2, 3, 10, 100, 1000)
 columns = list()
 
-for (n in N) {
-  l = sapply(1:n, function(x) {
-    runif(n=50000)
+for (i in 1:length(N)) {
+  l = sapply(1:N[i], function(x) {
+    rpois(n=50000, lambda=1)
   })
-  columns = append(columns, (rowSums(l) - mu) / sigma)
+  columns[[i]] = ((rowSums(l) - mu) / sigma)
 }
-print(dim(columns))
-# head(as.data.frame(columns))
+df = as.data.frame(do.call(cbind, columns))
+head(df)
 ```
 
 ## Plot
@@ -47,20 +47,30 @@ Tipp: Platzieren Sie die sechs Plots auf einem $3 \times 2$-Gitter.
 ```{r}
 # Ihre Lösung:
 library(ggplot2)
-h1 = ggplot(df) +
-  geom_histogram(aes(x = df[,1]), binwidth = 0.25)
-h2 = ggplot(df) +
-  geom_histogram(aes(x = df[,2]), binwidth = 0.25)
-h3 = ggplot(df) +
-  geom_histogram(aes(x = df[,3]), binwidth = 0.25)
-h4 = ggplot(df) +
-  geom_histogram(aes(x = df[,4]), binwidth = 0.25)
-h5 = ggplot(df) +
-  geom_histogram(aes(x = df[,5]), binwidth = 0.25)
-h6 = ggplot(df) +
-  geom_histogram(aes(x = df[,6]), binwidth = 0.25)
+library(gridExtra)
 
-# grid.arrange(h1, h2, h3, h4, h5, h6, nrow = 3, ncol = 2)
+norm = data.frame(rnorm(n=50000))
+
+h1 = ggplot(df) +
+  geom_histogram(aes(x = df[,1], color='red'), binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], color='blue'), binwidth = 0.25)
+h2 = ggplot(df) +
+  geom_histogram(aes(x = df[,2], color='red'), binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], color='blue'), binwidth = 0.25)
+h3 = ggplot(df) +
+  geom_histogram(aes(x = df[,3], color='red'), binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], color='blue'), binwidth = 0.25)
+h4 = ggplot(df) +
+  geom_histogram(aes(x = df[,4], color='red'), binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], color='blue'), binwidth = 0.25)
+h5 = ggplot(df) +
+  geom_histogram(aes(x = df[,5], color='red'), binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], color='blue'), binwidth = 0.25)
+h6 = ggplot(df) +
+  geom_histogram(aes(x = df[,6], color='red'), binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], color='blue'), binwidth = 0.25)
+
+grid.arrange(h1, h2, h3, h4, h5, h6, nrow = 3, ncol = 2)
 
 ```
 

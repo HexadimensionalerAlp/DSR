@@ -6,6 +6,7 @@ output: html_document
 ```{r echo = F, warning = F, message = F}
 library(ggplot2)
 library(dplyr)
+library(gridExtra)
 # Laden Sie benötigte Libraries...
 ```
 
@@ -149,13 +150,33 @@ Plotten Sie die Proportion of Variance explained (PVE) für jede Hauptkomponente
 
 ```{r echo=F}
 # Ihre Lösung
+eg = eigen(cov(pca$x))
+
+pve = sapply(eg$values, function(x) {
+  x / sum(eg$values)
+})
+
+pve_df = data.frame(PVE=pve)
+pve_df$Hauptkomponente = as.numeric(rownames(pve_df))
+pve_df = pve_df[order(pve_df$Hauptkomponente),]
+
+pve_plot = ggplot(pve_df) +
+  geom_bar(aes(x=Hauptkomponente, y=PVE), stat='identity')
+
+pve_accum_plot = ggplot(pve_df) +
+  geom_bar(aes(x=Hauptkomponente, y=cumsum(PVE)), stat='identity')
+
+grid.arrange(pve_plot, pve_accum_plot, nrow=1)
 ```
 
 #### Wichtige Hauptkomponenten
 
 Wie viele Hauptkomponenten erklären mehr als 50% der Varianz?
 
+Keine.
 
 Möglicherweise tragen bei Ihrem Ergebnis die letzten Hauptkomponenten keine Varianz mehr bei. Überlegen Sie, woran das liegen könnte.
+
+Hier nicht der Fall, aber generell kann es daran liegen, dass die nicht alle Dimensionen zwangsweise mit der Klassifizierung zu tun haben. Dimensionen können auch unkorreliert sein.
 
 
