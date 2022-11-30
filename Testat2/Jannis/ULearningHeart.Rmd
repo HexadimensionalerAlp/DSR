@@ -21,12 +21,12 @@ Es werden wieder die Herzdaten aus der letzten Aufgabe genutzt. Lesen Sie diese 
 file = url('https://oc.informatik.hs-mannheim.de/s/wyzFq34K9HiNjXR/download')
 df = data.frame(read.csv(file, sep = ',', header = TRUE, stringsAsFactors = TRUE))
 df$sex = factor(df$sex)
-df$goal = factor(df$goal)
+df$goal = factor(sapply(df$goal, function(x) if (x == 0) 0 else 1))
 ```
 
 ## Bedeutet "ähnliche Merkmale" auch "gleiche Diagnose"?
 
-Für jeden Datensatz ist bekannt, zu welcher Klasse er gehört: 0 (gesund) und 1 (erkrankt). Wir wollen untersuchen, wie gut _ähnliche_ Datensätze zur gleichen Klasse gehören. Dafür soll mit dem $k$-means-Clusterverfahren der Datensatz in zwei Cluster eingeteilt werden.
+Für jeden Datensatz ist bekannt, zu welcher Klasse er gehört: 0 (gesund) und 1 (erkrankt). Wir wollen untersuchen, wie gut *ähnliche* Datensätze zur gleichen Klasse gehören. Dafür soll mit dem $k$-means-Clusterverfahren der Datensatz in zwei Cluster eingeteilt werden.
 
 ### Nur reelle Merkmale
 
@@ -51,7 +51,6 @@ Hinweis: Berücksichtigen Sie, dass die Vergabe der Clusternummern zufällig ist
 ```{r}
 # Ihre Lösung:
 calculate_percentage_correct = function (goal, cluster) {
-  goal = sapply(goal, function(x) if (x == 0) 0 else 1)
   goal_class_1 = goal[1]
   goal_class_2 = 1 - goal_class_1
   cluster_class_1 = cluster[1]
@@ -72,12 +71,11 @@ Plotten Sie die Merkmale `age` und `thalach` als Scatterplot. Färben Sie die Pu
 
 ```{r}
 # Ihre Lösung:
+Zuordnung = factor(clustered_km$cluster)
+Korrektheit = factor(result$difference * 4)
 ggplot(df) +
-  geom_point(aes(age, thalach), color = clustered_km$cluster, shape = result$difference) +
-  scale_color_manual(values = c('red', 'blue')) + 
-  scale_shape_manual(values = c(19, 20))
+  geom_point(aes(age, thalach, color = Zuordnung, shape = Korrektheit))
 ```
-
 
 ### Mit Dummy-Variablen
 
@@ -103,7 +101,8 @@ Berechnen Sie für diesen Fall, wie viel Prozent der Datensätze richtig einem C
 result_all = calculate_percentage_correct(df$goal, clustered_all_km$cluster)
 result_all$percentage
 ```
-Der Wert ist deutlich höher als bei der vorherigen Zuweisung.
+
+Der Wert ist deutlich höher als bei der vorherigen Zuweisung. TODO: warum ist dies so?
 
 #### Scatterplot age vs. thalach
 
@@ -111,10 +110,10 @@ Plotten Sie erneut und schauen Sie, wie die richtigen Punkte nun verteilt sind. 
 
 ```{r}
 # Ihre Lösung:
+Zuordnung = factor(clustered_all_km$cluster)
+Korrektheit = factor(result_all$difference * 4)
 ggplot(df) +
-  geom_point(aes(age, thalach), color = clustered_all_km$cluster, shape = result_all$difference) +
-  scale_color_manual(values = c('red', 'blue')) + 
-  scale_shape_manual(values = c(19, 20))
+  geom_point(aes(age, thalach, color = Zuordnung, shape = Korrektheit))
 ```
 
 ## PCA
@@ -129,7 +128,7 @@ Welche Merkmale der ersten Hauptkomponente tragen am meisten zu der Varianz bei?
 # Ihre Lösung:
 df_transformed_pca = fastDummies::dummy_columns(df) |> select_if(is.numeric)
 pca = stats::prcomp(df_transformed_pca, scale = TRUE)
-sort(abs(pca$rotation[1:10, 'PC1']), decreasing = TRUE)
+sort(abs(pca$rotation[,'PC1']), decreasing = TRUE)[1:10]
 ```
 
 ### Erste und zweite Hauptkomponente
@@ -138,8 +137,9 @@ Plotten Sie die erste und zweite Hauptkomponente als Scatterplot. Färben Sie di
 
 ```{r}
 # Ihre Lösung:
+Diagnose = df$goal
 ggplot(data.frame(pca$x)) +
-  geom_point(aes(PC1, PC2), color = df$goal)
+  geom_point(aes(PC1, PC2, color = Diagnose))
 ```
 
 ### PVE
@@ -178,5 +178,3 @@ Keine.
 Möglicherweise tragen bei Ihrem Ergebnis die letzten Hauptkomponenten keine Varianz mehr bei. Überlegen Sie, woran das liegen könnte.
 
 Hier nicht der Fall, aber generell kann es daran liegen, dass die nicht alle Dimensionen zwangsweise mit der Klassifizierung zu tun haben. Dimensionen können auch unkorreliert sein.
-
-

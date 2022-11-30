@@ -5,11 +5,9 @@ output: html_notebook
 
 # Zentrale Grenzwertsatz
 
-Für jedes $n=1,2,\ldots$ seien die Zufallsvariablen $X_1, X_2, \ldots, X_n$ unabhängig und besitzen die gleiche Verteilung mit dem Erwartungswert $\mu = E(X_i)$ und der Varianz $\sigma^2=Var(X_i)=$. Dann gilt für die Verteilungsfunktion der standardisierten Summen $G_n = \frac{\sum_{i=1}^{n}X_{i}-n\mu}{\sqrt{n}\sigma}$:
-$$
+Für jedes $n=1,2,\ldots$ seien die Zufallsvariablen $X_1, X_2, \ldots, X_n$ unabhängig und besitzen die gleiche Verteilung mit dem Erwartungswert $\mu = E(X_i)$ und der Varianz $\sigma^2=Var(X_i)=$. Dann gilt für die Verteilungsfunktion der standardisierten Summen $G_n = \frac{\sum_{i=1}^{n}X_{i}-n\mu}{\sqrt{n}\sigma}$: $$
 \lim_{n\rightarrow\infty}P\left(G_n \leq x\right)=\Phi(x)
-$$
-Dabei ist $\Phi$ die Verteilungsfunktion der Standard-Normalverteilung $N(0,1)$.
+$$ Dabei ist $\Phi$ die Verteilungsfunktion der Standard-Normalverteilung $N(0,1)$.
 
 Überprüfen Sie mit R den zentralen Grenzwertsatz.
 
@@ -18,7 +16,6 @@ Dabei ist $\Phi$ die Verteilungsfunktion der Standard-Normalverteilung $N(0,1)$.
 Erzeugen Sie einen Data Frame, der die gezogenen Zufallszahlen $G_n$ enthält. Die Stichprobe soll einen Umfang von 50000 haben (Anzahl Zeilen der Tabelle). Der Data Frame hat sechs Spalten, die die Werte für die Zahlen $n=1, 2, 3, 10, 100, 1000$ enthalten. Geben Sie die ersten 10 Zeilen des Data Frames aus.
 
 Welche Verteilung Sie für $X_i$ nehmen, bleibt Ihnen überlassen. Es soll nur keine Normalverteilung sein.
-
 
 ```{r}
 # Ihre Lösung:
@@ -35,7 +32,7 @@ for (i in 1:length(N)) {
   columns[[i]] = ((rowSums(l) - mu) / sigma)
 }
 df = as.data.frame(do.call(cbind, columns))
-head(df)
+head(df, 10)
 ```
 
 ## Plot

@@ -9,42 +9,47 @@ library(ggplot2)
 library(dplyr)
 # Laden Sie benötigte Libraries...
 ```
+
 # Untersuchungen zur koronaren Herzkrankheit
 
 In diesem Abschnitt sollen Daten von Probanden bzw. Patienten auf das Risiko für koronare Herzkrankheit untersucht werden. Dies ist eine Erkrankung der Herzkranzgefäße (Koronararterien), die sich durch Ablagerungen in den Gefäßwänden verengen. Der Original-Herz-Datensatz ist unter
 
- * https://archive.ics.uci.edu/ml/datasets/Heart+Disease
+-   <https://archive.ics.uci.edu/ml/datasets/Heart+Disease>
 
 beschrieben. Wir nutzen eine konsolidierte CSV-Datei, die bereits Header enthält. Download unter:
 
- * https://oc.informatik.hs-mannheim.de/s/wyzFq34K9HiNjXR/download
+-   <https://oc.informatik.hs-mannheim.de/s/wyzFq34K9HiNjXR/download>
 
 Die Datei enthält 13 Merkmale, die einen Einfluss auf eine koronare Herzkrankheit haben können. Das 14. Merkmal `goal` (im Original auch `num`) ist die Diagnose (Klassifizierung). Der Wert ist 0, falls keine krankhafte Verengung der Gefäße vorliegt, oder 1, 2, 3 oder 4, falls -- je nach Stärke -- eine krankhafte Verengung der Gefäße vorliegt. Unter
 
-  * https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names
+-   <https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names>
 
 finden Sie eine Beschreibung aller Attribute. Hier ist eine Zusammenfassung. Wir benötigen insbesondere die Merkmale `sex`, `trestbps`, `chol` und `goal`.
 
-|Feld|Bedeutung|
-|-|------|
-| age | age in years |
-| sex | sex (1 = male; 0 = female)|
-| cp | chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic) |
-| trestbps | resting systolic blood pressure (in mmHg on admission to the hospital) |
-| chol | serum cholestoral in mg/dl |
-| fbs | fasting blood sugar > 120 mg/dl (1 = true; 0 = false) |
-| restecg | resting electrocardiographic results (0 = normal; 1 = having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV); 2 = showing probable or definite left ventricular hypertrophy by Estes' criteria) |
-| thalach | maximum heart rate achieved |
-| exang | exercise induced angina (1 = yes; 0 = no) |
-| oldpeak | ST depression induced by exercise relative to rest.^[ST depression refers to a finding on an electrocardiogram, wherein the trace in the ST segment is abnormally low below the baseline.] |
-| slope | slope of the peak exercise ST segment (1 = upsloping; 2 = flat; 3 = downsloping) |
-| ca | number of major vessels (0-3) colored by flourosopy |
-| thal | 3 = normal; 6 = fixed defect; 7 = reversable defect |
-| goal | diagnosis of heart disease (0: < 50% diameter narrowing ; 1, 2, 3, 4: > 50% diameter narrowing) |
+| Feld     | Bedeutung                                                                                                                                                                                                                                 |
+|-----------------|-------------------------------------------------------|
+| age      | age in years                                                                                                                                                                                                                              |
+| sex      | sex (1 = male; 0 = female)                                                                                                                                                                                                                |
+| cp       | chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)                                                                                                                                         |
+| trestbps | resting systolic blood pressure (in mmHg on admission to the hospital)                                                                                                                                                                    |
+| chol     | serum cholestoral in mg/dl                                                                                                                                                                                                                |
+| fbs      | fasting blood sugar \> 120 mg/dl (1 = true; 0 = false)                                                                                                                                                                                    |
+| restecg  | resting electrocardiographic results (0 = normal; 1 = having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of \> 0.05 mV); 2 = showing probable or definite left ventricular hypertrophy by Estes' criteria) |
+| thalach  | maximum heart rate achieved                                                                                                                                                                                                               |
+| exang    | exercise induced angina (1 = yes; 0 = no)                                                                                                                                                                                                 |
+| oldpeak  | ST depression induced by exercise relative to rest.[^1]                                                                                                                                                                                   |
+| slope    | slope of the peak exercise ST segment (1 = upsloping; 2 = flat; 3 = downsloping)                                                                                                                                                          |
+| ca       | number of major vessels (0-3) colored by flourosopy                                                                                                                                                                                       |
+| thal     | 3 = normal; 6 = fixed defect; 7 = reversable defect                                                                                                                                                                                       |
+| goal     | diagnosis of heart disease (0: \< 50% diameter narrowing ; 1, 2, 3, 4: \> 50% diameter narrowing)                                                                                                                                         |
+
+[^1]: ST depression refers to a finding on an electrocardiogram, wherein the trace in the ST segment is abnormally low below the baseline.
 
 ## Einlesen der Herz-Daten
 
-Lesen Sie die Datei aus der URL als Data Frame zur weiteren Bearbeitung ein. Überlegen Sie, ob sie Faktoren sinnvoll einsetzen können. Geben Sie die ersten drei Zeilen und fünf Spalten aus^[Möglicherweise kommt es zu einem Fehler beim Einlesen des ersten Attributs (`age`). Manuelles Umbenennen hilft.]:
+Lesen Sie die Datei aus der URL als Data Frame zur weiteren Bearbeitung ein. Überlegen Sie, ob sie Faktoren sinnvoll einsetzen können. Geben Sie die ersten drei Zeilen und fünf Spalten aus[^2]:
+
+[^2]: Möglicherweise kommt es zu einem Fehler beim Einlesen des ersten Attributs (`age`). Manuelles Umbenennen hilft.
 
 ```{r}
 # Ihre Lösung:
@@ -67,7 +72,7 @@ Verschaffen Sie sich einen Überblick, indem Sie ein Boxplot für das Cholesteri
 ```{r}
 # Ihre Lösung:
 ggplot(df) +
-  geom_boxplot(aes(sex, chol))
+  geom_boxplot(aes(sex, chol, fill=sex))
 ```
 
 ### Konfidenz-Intervall
@@ -131,8 +136,7 @@ Es sieht so aus, als ob der Cholesterin-Wert bei den erkrankten Patienten höher
 
 Formulieren Sie die Hypothesen ($H_0$ und $H_1$).
 
-$H_0$: Der Cholesterin-Wert bei erkrankten Patienten ist nicht höher als bei nicht erkrankten $E(X) = \mu \leq 0$
-$H_1$: Der Cholesterin-Wert bei erkrankten Patienten ist höher als bei nicht erkrankten $E(X) = \mu > 0$
+$H_0$: Der Cholesterin-Wert bei erkrankten Patienten ist nicht höher als bei nicht erkrankten $E(X) = \mu \leq 0$ $H_1$: Der Cholesterin-Wert bei erkrankten Patienten ist höher als bei nicht erkrankten $E(X) = \mu > 0$
 
 #### Testanwendung
 
@@ -140,10 +144,10 @@ Wenden Sie den Test mit R an. Was ist das Ergebnis?
 
 ```{r}
 # Ihre Lösung:
-t.test(df[df$goal == 1,]$chol, conf.level = 0.95, alternative = 'greater')
+t.test(df[df$goal == 1,]$chol, conf.level = 0.95, mu = 0, alternative = 'greater')
 ```
-Da p kleiner als 0,05 ist, wird $H_0$ verworfen. Der Cholesterin-Wert bei Erkrankten ist somit höher als bei nicht Erkrankten.
 
+Da p kleiner als 0,05 ist, wird $H_0$ verworfen. Der Cholesterin-Wert bei Erkrankten ist somit höher als bei nicht Erkrankten.
 
 ## Systolischer Ruheblutdruck
 
@@ -163,8 +167,7 @@ ggplot(df) +
 
 #### Normalverteilt?
 
-Kann überhaupt davon ausgegangen werden, dass die Daten normalverteilt sind?
-Antwort: Ja, siehe zentraler Grenzwertsatz.
+Kann überhaupt davon ausgegangen werden, dass die Daten normalverteilt sind? Antwort: Ja, siehe zentraler Grenzwertsatz.
 
 ### Konfidenzintervalle nach Erkrankung
 
@@ -186,9 +189,7 @@ kable(result)
 
 #### Wie lauten die Hypothesen?
 
-Formulieren Sie die Hypothesen ($H_0$ und $H_1$).
-$H_0$: Der Ruhe-Blutdruck bei erkrankten Patienten ist nicht höher als bei gesunden $E(X) = \mu \leq 0$
-$H_1$: Der Ruhe-Blutdruck bei erkrankten Patienten ist höher als bei gesunden $E(X) = \mu > 0$
+Formulieren Sie die Hypothesen ($H_0$ und $H_1$). $H_0$: Der Ruhe-Blutdruck bei erkrankten Patienten ist nicht höher als bei gesunden $E(X) = \mu \leq 0$ $H_1$: Der Ruhe-Blutdruck bei erkrankten Patienten ist höher als bei gesunden $E(X) = \mu > 0$
 
 #### Testanwendung
 
@@ -198,5 +199,5 @@ Wenden Sie den Test mit R an. Was ist das Ergebnis?
 # Ihre Lösung:
 t.test(df[df$goal == 1,]$trestbps, conf.level = 0.95, alternative = 'greater')
 ```
-Da p kleiner als 0,05 ist, wird $H_0$ verworfen. Der Ruhe-Blutdruck bei Erkrankten ist somit höher als bei Gesunden.
 
+Da p kleiner als 0,05 ist, wird $H_0$ verworfen. Der Ruhe-Blutdruck bei Erkrankten ist somit höher als bei Gesunden.
