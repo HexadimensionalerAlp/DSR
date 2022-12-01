@@ -21,7 +21,7 @@ Es werden wieder die Herzdaten aus der letzten Aufgabe genutzt. Lesen Sie diese 
 file = url('https://oc.informatik.hs-mannheim.de/s/wyzFq34K9HiNjXR/download')
 df = data.frame(read.csv(file, sep = ',', header = TRUE, stringsAsFactors = TRUE))
 df$sex = factor(df$sex)
-df$goal = factor(sapply(df$goal, function(x) if (x == 0) 0 else 1))
+df$goal = factor(df$goal)
 ```
 
 ## Bedeutet "ähnliche Merkmale" auch "gleiche Diagnose"?
@@ -51,6 +51,7 @@ Hinweis: Berücksichtigen Sie, dass die Vergabe der Clusternummern zufällig ist
 ```{r}
 # Ihre Lösung:
 calculate_percentage_correct = function (goal, cluster) {
+  goal = sapply(goal, function(x) if (x == 0) 0 else 1)
   goal_class_1 = goal[1]
   goal_class_2 = 1 - goal_class_1
   cluster_class_1 = cluster[1]
@@ -137,7 +138,7 @@ Plotten Sie die erste und zweite Hauptkomponente als Scatterplot. Färben Sie di
 
 ```{r}
 # Ihre Lösung:
-Diagnose = df$goal
+Diagnose = factor(sapply(df$goal, function(x) if (x == 0) 0 else 1))
 ggplot(data.frame(pca$x)) +
   geom_point(aes(PC1, PC2, color = Diagnose))
 ```
@@ -177,4 +178,4 @@ Keine.
 
 Möglicherweise tragen bei Ihrem Ergebnis die letzten Hauptkomponenten keine Varianz mehr bei. Überlegen Sie, woran das liegen könnte.
 
-Hier nicht der Fall, aber generell kann es daran liegen, dass die nicht alle Dimensionen zwangsweise mit der Klassifizierung zu tun haben. Dimensionen können auch unkorreliert sein.
+Das kann daran liegen, dass nicht alle Dimensionen zwangsweise mit der Klassifizierung zu tun haben. Dimensionen können auch unkorreliert sein.
