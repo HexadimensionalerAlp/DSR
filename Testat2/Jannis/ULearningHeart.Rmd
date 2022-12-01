@@ -102,7 +102,7 @@ result_all = calculate_percentage_correct(df$goal, clustered_all_km$cluster)
 result_all$percentage
 ```
 
-Der Wert ist deutlich höher als bei der vorherigen Zuweisung. TODO: warum ist dies so?
+Der Wert ist deutlich höher als bei der vorherigen Zuweisung. Das leigt daran, dass jetzt mehr Merkmale verwendet werden konnten.
 
 #### Scatterplot age vs. thalach
 
