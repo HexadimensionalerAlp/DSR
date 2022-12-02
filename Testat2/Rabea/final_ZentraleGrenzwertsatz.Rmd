@@ -51,7 +51,7 @@ norm = data.frame(rnorm(n=50000))
 
 hist1 = ggplot(df) +
   geom_histogram(aes(x = df[,1], fill='Chi-Quadrat'),  alpha = 0.5, binwidth = 0.25) +
-  geom_histogram(aes(x = norm[,1], fill='Normal'),alpha = 0.5, binwidth = 0.25) + labs(xlab = 'n=1') + 
+  geom_histogram(aes(x = norm[,1], fill='Normal'),alpha = 0.5, binwidth = 0.25) + 
   labs(x='n=1')
 hist2 = ggplot(df) +
   geom_histogram(aes(x = df[,2], fill='Chi-Quadrat'), alpha = 0.5, binwidth = 0.25) +
