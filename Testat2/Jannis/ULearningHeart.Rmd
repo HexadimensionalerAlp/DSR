@@ -12,6 +12,10 @@ library(gridExtra)
 
 # Clustering und PCA auf die Herzdaten
 
+## ANMERKUNG!!!
+
+Wichtig: goal rausfiltern für Clustering! Auch bei PCA!
+
 ## Einlesen der Herz-Daten
 
 Es werden wieder die Herzdaten aus der letzten Aufgabe genutzt. Lesen Sie diese als Data Frame ein.
@@ -39,7 +43,7 @@ Clustern Sie diese Daten. Überlegen Sie, ob Sie die Daten standardisieren wolle
 ```{r}
 # Ihre Lösung:
 df_scaled = scale(df |> select_if(is.numeric))
-clustered_km = stats::kmeans(df_scaled, centers = 2)
+clustered_km = stats::kmeans(df_scaled, centers = 2, nstart=20)
 ```
 
 #### Richtig?
@@ -88,8 +92,9 @@ Clustern Sie diese Daten. Überlegen Sie, wie die Faktoren zu Zahlen werden.
 
 ```{r}
 # Ihre Lösung:
-df_transformed = fastDummies::dummy_columns(df) |> select_if(is.numeric)
+df_transformed = fastDummies::dummy_columns(df[,-c(goal)], remove_selected_columns=TRUE)
 df_all_scaled = scale(df_transformed)
+head(df_all_scaled)
 clustered_all_km = stats::kmeans(df_all_scaled, centers = 2)
 ```
 

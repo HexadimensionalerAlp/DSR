@@ -136,7 +136,8 @@ Es sieht so aus, als ob der Cholesterin-Wert bei den erkrankten Patienten höher
 
 Formulieren Sie die Hypothesen ($H_0$ und $H_1$).
 
-$H_0$: Der Cholesterin-Wert bei erkrankten Patienten ist nicht höher als bei nicht erkrankten $E(X) = \mu \leq 0$ $H_1$: Der Cholesterin-Wert bei erkrankten Patienten ist höher als bei nicht erkrankten $E(X) = \mu > 0$
+$H_0$: Der Cholesterin-Wert bei erkrankten Patienten (U) ist nicht höher als bei nicht erkrankten (H): $E(H - U) \leq 0$ 
+$H_1$: Der Cholesterin-Wert bei erkrankten Patienten ist höher als bei nicht erkrankten $E(H - U) > 0$
 
 #### Testanwendung
 
@@ -144,10 +145,10 @@ Wenden Sie den Test mit R an. Was ist das Ergebnis?
 
 ```{r}
 # Ihre Lösung:
-t.test(df[df$goal == 1,]$chol, conf.level = 0.95, mu = 0, alternative = 'greater')
+t.test(df[df$goal == 0,]$chol, df[df$goal == 1,]$chol, conf.level = 0.95, mu = 0, alternative = 'less')
 ```
 
-Da p kleiner als 0,05 ist, wird $H_0$ verworfen. Der Cholesterin-Wert bei Erkrankten ist somit höher als bei nicht Erkrankten.
+Da p größer als 0,05 ist, kann $H_0$ nicht verworfen werden.
 
 ## Systolischer Ruheblutdruck
 
@@ -175,8 +176,8 @@ Berechnen Sie die Konfidenzintervalle für den Ruheblutdruck aufgeschlüsselt na
 
 ```{r}
 # Ihre Lösung:
-t_negative = t.test(df[df$goal == 0,]$trestbps, conf.level = 0.95)
-t_positive = t.test(df[df$goal == 1,]$trestbps, conf.level = 0.95)
+t_negative = t.test(df[df$goal == 0,]$trestbps, conf.level = 0.95, alternative = 'two.sided')
+t_positive = t.test(df[df$goal == 1,]$trestbps, conf.level = 0.95, alternative = 'two.sided')
 result = data.frame(t_negative$conf.int, t_positive$conf.int)
 rownames(result) = c('lower', 'upper')
 colnames(result) = c('negative', 'positive')
@@ -189,7 +190,10 @@ kable(result)
 
 #### Wie lauten die Hypothesen?
 
-Formulieren Sie die Hypothesen ($H_0$ und $H_1$). $H_0$: Der Ruhe-Blutdruck bei erkrankten Patienten ist nicht höher als bei gesunden $E(X) = \mu \leq 0$ $H_1$: Der Ruhe-Blutdruck bei erkrankten Patienten ist höher als bei gesunden $E(X) = \mu > 0$
+Formulieren Sie die Hypothesen ($H_0$ und $H_1$). 
+
+$H_0$: Der Ruhe-Blutdruck bei erkrankten Patienten (U) ist nicht höher als bei nicht erkrankten (H): $E(H - U) \leq 0$ 
+$H_1$: Der Ruhe-Blutdruck bei erkrankten Patienten ist höher als bei nicht erkrankten $E(H - U) > 0$
 
 #### Testanwendung
 
@@ -197,7 +201,7 @@ Wenden Sie den Test mit R an. Was ist das Ergebnis?
 
 ```{r}
 # Ihre Lösung:
-t.test(df[df$goal == 1,]$trestbps, conf.level = 0.95, alternative = 'greater')
+t.test(df[df$goal == 0,]$trestbps, df[df$goal == 1,]$trestbps, conf.level = 0.95, alternative = 'less')
 ```
 
 Da p kleiner als 0,05 ist, wird $H_0$ verworfen. Der Ruhe-Blutdruck bei Erkrankten ist somit höher als bei Gesunden.
