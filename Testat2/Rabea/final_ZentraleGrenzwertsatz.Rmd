@@ -1,0 +1,114 @@
+---
+title: "Zentrale Grenzwertsatz"
+output: html_notebook
+---
+
+# Zentrale Grenzwertsatz
+
+Für jedes $n=1,2,\ldots$ seien die Zufallsvariablen $X_1, X_2, \ldots, X_n$ unabhängig und besitzen die gleiche Verteilung mit dem Erwartungswert $\mu = E(X_i)$ und der Varianz $\sigma^2=Var(X_i)=$. Dann gilt für die Verteilungsfunktion der standardisierten Summen $G_n = \frac{\sum_{i=1}^{n}X_{i}-n\mu}{\sqrt{n}\sigma}$: $$
+\lim_{n\rightarrow\infty}P\left(G_n \leq x\right)=\Phi(x)
+$$ Dabei ist $\Phi$ die Verteilungsfunktion der Standard-Normalverteilung $N(0,1)$.
+
+Überprüfen Sie mit R den zentralen Grenzwertsatz.
+
+## Verteilung
+
+Erzeugen Sie einen Data Frame, der die gezogenen Zufallszahlen $G_n$ enthält. Die Stichprobe soll einen Umfang von 50000 haben (Anzahl Zeilen der Tabelle). Der Data Frame hat sechs Spalten, die die Werte für die Zahlen $n=1, 2, 3, 10, 100, 1000$ enthalten. Geben Sie die ersten 10 Zeilen des Data Frames aus.
+
+Welche Verteilung Sie für $X_i$ nehmen, bleibt Ihnen überlassen. Es soll nur keine Normalverteilung sein.
+
+```{r}
+# Ihre Lösung:
+set.seed(42)
+N = c(1, 2, 3, 10, 100, 1000)
+columns = list()
+
+for (i in 1:length(N)) {
+  n = N[i]
+  l = sapply(1:n, function(x) {
+    rchisq(n=50000, df = n)
+  })
+  mu = n
+  sigma = sqrt(2 * n)
+  columns[[i]] = ((rowSums(l) - n * mu) / (sqrt(n) * sigma))
+}
+df = as.data.frame(do.call(cbind, columns))
+head(df, 10)
+```
+
+## Plot
+
+Plotten Sie sechs Histogramme, die je für $n=1, 2, 3, 10, 100, 1000$ die Verteilung im Vergleich zu einer ($0,1$)-Normalverteilung zeigen. Die Intervallbreite soll 0,25 sein.
+
+Tipp: Platzieren Sie die sechs Plots auf einem $3 \times 2$-Gitter.
+
+```{r}
+# Ihre Lösung:
+library(ggplot2)
+library(gridExtra)
+
+norm = data.frame(rnorm(n=50000))
+
+hist1 = ggplot(df) +
+  geom_histogram(aes(x = df[,1], fill='Chi-Quadrat'),  alpha = 0.5, binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], fill='Normal'),alpha = 0.5, binwidth = 0.25) + 
+  labs(x='n=1')
+hist2 = ggplot(df) +
+  geom_histogram(aes(x = df[,2], fill='Chi-Quadrat'), alpha = 0.5, binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], fill='Normal'), alpha = 0.5, binwidth = 0.25) +
+   labs(x='n=2')
+hist3 = ggplot(df) +
+  geom_histogram(aes(x = df[,3], fill='Chi-Quadrat'), alpha = 0.5, binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], fill='Normal'), alpha = 0.5, binwidth = 0.25) +
+   labs(x='n=3')
+hist4 = ggplot(df) +
+  geom_histogram(aes(x = df[,4], fill='Chi-Quadrat'), alpha = 0.5, binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], fill='Normal'), alpha = 0.5, binwidth = 0.25) + 
+   labs(x='n=10')
+hist5 = ggplot(df) +
+  geom_histogram(aes(x = df[,5], fill='Chi-Quadrat'), alpha = 0.5, binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], fill='Normal'), alpha = 0.5, binwidth = 0.25) + 
+   labs(x='n=100')
+hist6 = ggplot(df) +
+  geom_histogram(aes(x = df[,6], fill='Chi-Quadrat'), alpha = 0.5, binwidth = 0.25) +
+  geom_histogram(aes(x = norm[,1], fill='Normal'), alpha = 0.5, binwidth = 0.25) + 
+   labs(x='n=1000')
+
+grid.arrange(hist1, hist2, hist3, hist4, hist5, hist6, nrow = 3, ncol = 2)
+
+```
+
+## Abweichung
+
+Nun soll die Abweichung der Standardisierten $G$ von der Normalverteilung für alle $n$ quantifiziert werden. Hierzu soll für alle Balken (bins) der Histogramme aus der vorigen Aufgabe die Differenz von $G$ zur Normalverteilung gebildet und quadriert werden. Diese Werte werden aufaddiert und durch die Anzahl der Intervalle geteilt. Daraus wird die Wurzel gezogen.
+
+Sie können sich auch ein anderes Maß zur Bestimmung der Abweichung überlegen.
+
+Geben Sie die Abweichungen aus. Stimmt es, dass die Abweichungen mit größerem $n$ kleiner werden?
+
+Tipp: `hist(plot = FALSE)` erzeugt ein Histogramm, ohne es zu plotten. Gerne können Sie auch Ihr eigenes Histogramm nutzen.
+
+```{r}
+norm_bin_height = ggplot_build(hist1)$data[[2]]$count
+
+bin_heights = list(ggplot_build(hist1)$data[[1]]$count,
+  ggplot_build(hist2)$data[[1]]$count,
+  ggplot_build(hist3)$data[[1]]$count,
+  ggplot_build(hist4)$data[[1]]$count,
+  ggplot_build(hist5)$data[[1]]$count,
+  ggplot_build(hist6)$data[[1]]$count)
+
+vars = list()
+
+for (h in bin_heights) {
+  diffs = sapply(1:length(h), function(i) {
+    (norm_bin_height[i] - h[i]) ^ 2
+  })
+  vars = append(vars, sqrt(sum(diffs) / length(diffs)))
+}
+
+for (i in 1:6) {
+  print(paste0('n=', N[i], ': ', vars[[i]]))
+}
+
+```
