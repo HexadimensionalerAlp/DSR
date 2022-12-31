@@ -1,0 +1,41 @@
+---
+title: "Package-Erstellung"
+output: html_document
+---
+
+```{r echo = F, warning = F, message = F}
+# Laden Sie benötigte Libraries...
+```
+
+# Package-Erstellung
+
+In dieser Aufgabe soll ein R-Package erstellt werden, das lokal in einer anderen R-Umgebung installiert und ausgeführt werden kann. Sie dürfen sich selbst überlegen, was Ihr Paket machen soll -- gerne etwas Sinnvolles. Die Randbedingungen lauten:
+
+ * Mindestens zwei exportierte Funktionen.
+ * Mindestens eine exportierte Funktion liefert ein _echtes_ R-Objekt, d.h. eine Instanz einer S3- oder R6-Klasse.
+ * Mindestens eine interne Funktion, die nicht nach dem Laden des Packages sichtbar ist.
+ * Es soll etwas mit Statistik oder Data Science zu tun haben und auf Data Frames (siehe auch unten) angewandt werden können.
+
+Neben den o.g. Dingen gehen das erfolgreiche Installieren und die nachfolgenden Punkte in die Bewertung ein.
+
+## Dokumentation
+
+Schreiben Sie eine ausführliche Dokumentation:
+
+ * Was macht das Package allgemein?
+ * Was machen die Funktionen?
+ * Geben Sie Beispiele zur Anwendung in den Hilfeseiten.
+
+Der Text kann in Deutsch oder Englisch geschrieben werden. Die Hilfeseiten sollen nach der Installation des Packages in RStudio lesbar sein.
+
+## Tests
+
+Schreiben Sie mindestens 10 Testfälle mit `Testthat`, die Ihre Funktionen testen. Diese müssen alle erfolgreich sein, wenn das Package veröffentlicht wird.
+
+## Beispieldatensatz
+
+Fügen Sie Ihrem Package einen kleinen Beispieldatensatz bei. Klein meint: ab 50 bis maximal 500 Datensätze.
+
+## Abgabe
+
+Geben den Source-Code Ihres Packages als Zip-Datei ab und laden Sie das Package selbst hoch.

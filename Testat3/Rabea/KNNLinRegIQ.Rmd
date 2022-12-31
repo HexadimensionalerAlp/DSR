@@ -1,0 +1,58 @@
+---
+title: "Regression (IQ) mit KNN"
+output: html_document
+---
+
+```{r echo = F, warning = F, message = F}
+# Laden Sie benötigte Libraries...
+```
+
+# Vorhersage des IQ mit KNN-Regression
+
+In dieser Aufgabe soll mittels KNN-Regression der Intelligenz-Quotient (IQ) von Kindern vorhergesagt werden (siehe auch andere Aufgabe).
+
+## KNN-Regression erläutern
+
+$k$-nearest-neighbors (KNN) ist ein sehr einfaches Verfahren, mit dem Daten klassifiziert oder eine Regression berechnet werden kann. Im Fall der Regression werden für einen Datensatz die nächsten $k \in \mathbb{N}$ Nachbarn ermittelt und der Mittelwert dieser $k$ Response-Variablen berechnet -- das ist der geschätzte Wert. Üblicherweise wird die euklidische Distanz zum Ermitteln der Nachbarn genutzt.
+
+Ein Einführungsvideo finden Sie unter https://youtu.be/sTJApaBjong. Weitere Infos auch unter https://bookdown.org/tpinto_home/Regression-and-Classification/k-nearest-neighbours-regression.html
+
+Beschreiben Sie mit eigenen Worten (180 bis 220 Wörter), wie dieses Verfahren für die Regression und Klassifikation angewandt werden kann. Was sind die Vor- und Nachteile? Was sind die Besonderheiten im Vergleich zu anderen Verfahren?
+
+(Ihre Lösung als Text hier)
+
+
+## Daten importieren
+
+Laden Sie abermals den Datensatz unter https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download in einen Data Frame.
+
+```{r}
+# Ihre Lösung:
+```
+
+## KNN-Regression anwenden
+
+### Anwendung
+
+Wenden Sie für diesen Datensatz eine KNN-Regression an, um den IQ von Kindern in Abhängigkeit der Merkmale schätzen zu können. Im Package `caret` gibt es die Lernmethode `knn`, die dafür genutzt werden kann.
+
+```{r}
+# Ihre Lösung:
+```
+
+### $k$?
+
+Finden Sie heraus, welcher Wert für die Anzahl der nächsten Nachbarn am besten funktioniert. Beschreiben Sie, wie Sie das gemacht haben.
+
+(Ihre Lösung als Text oder Chunk hier)
+
+### $R^2$
+Lassen Sie die $R^2$-Statistik berechnen. Wie sieht diese im Vergleich zur linearen Regression aus? Welches Verfahren ist besser?
+
+(Ihre Lösung als Text hier)
+
+```{r}
+# Ihre Lösung:
+```
+
+

@@ -1,0 +1,93 @@
+---
+title: "Lineare Regression (IQ)"
+output: html_document
+---
+
+```{r echo = F, warning = F, message = F}
+# Laden Sie benötigte Libraries...
+```
+
+# Vorhersage des IQ mit linearer Regression
+
+In dieser Aufgabe soll mittels linearer Regression der Intelligenz-Quotient (IQ) von Kindern vorhergesagt werden.
+
+## Daten importieren und anschauen
+
+Laden Sie die Daten unter https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download in einen Data Frame. Die Daten sind im RDS-Format gespeichert. Der Datensatz stammt von Martin Brand (brandt@psychologie.uni-mannheim.de, https://www.sowi.uni-mannheim.de/kuhlmann/team/akademische-mitarbeiterinnen-und-mitarbeiter/brandt-martin/). Die Spalten bedeuten:
+
+ * `id`: Eindeutige Nummer
+ * `IQ.mother`: IQ der Mutter
+ * `IQ.father`: IQ des Vaters
+ * `n.siblings`: Anzahl der Geschwister
+ * `IQ.child`: IQ des Kindes
+
+```{r}
+# Ihre Lösung:
+```
+
+Verschaffen Sie sich einen ersten Überblick über die Daten. Plotten Sie dazu ein Mehrfach-Diagramm, das Scatterplots aller vier Variablen (drei Merkmale und Response `IQ.child`) untereinander zeigt. D.h. jede Variable soll mit jeder anderen paarweise verglichen werden.
+
+Tipp: Mit der `caret::featurePlot`-Funktion lässt sich das gut erreichen.
+
+```{r}
+# Ihre Lösung:
+```
+
+## Lineare Regression
+
+Wenden Sie für diesen Datensatz eine lineare Regression an, um den IQ von Kindern in Abhängigkeit der Merkmale schätzen zu können. Die lineare Regression soll im Objekt `lm.iq` gespeichert werden.
+
+```{r}
+# Ihre Lösung:
+```
+
+### Merkmale
+
+Welche Merkmale spielen eine Rolle? Interpretieren Sie das Ergebnis.
+
+```{r}
+# Ihre Lösung:
+```
+
+
+### RSE
+
+Berechnen Sie den RSE. Was gibt dieser an?
+
+```{r}
+# Ihre Lösung:
+```
+
+### Anteil erklärter Varianz
+
+Wie groß (in Prozent) ist der Anteil der erklärten Varianz? Ist das Ergebnis zufriedenstellend?
+
+```{r}
+# Ihre Lösung:
+```
+
+## Geschwister-Anzahl als Faktor
+
+### Anwendung
+
+Wandeln Sie den Datensatz so um, dass die Anzahl der Geschwister (`n.siblings`) ein Faktor ist und wenden Sie darauf die lineare Regression an.
+
+```{r}
+# Ihre Lösung:
+```
+
+### $R^2$
+
+$R^2$ hat sich verändert. Interpretieren bzw. begründen Sie das Ergebnis:
+
+
+## Schätzung für Testdaten
+
+Abschließend soll mittels Cross-Validation überprüft werden, wie gut dieses Verfahren für unbekannte Testdaten funktioniert. Überlegen Sie sich ein passendes Verfahren und bestimmen Sie damit die $R^2$-Statistik.
+
+```{r}
+# Ihre Lösung:
+```
+
+
+
