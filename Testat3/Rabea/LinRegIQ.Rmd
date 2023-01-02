@@ -5,6 +5,7 @@ output: html_document
 
 ```{r echo = F, warning = F, message = F}
 # Laden Sie benötigte Libraries...
+
 ```
 
 # Vorhersage des IQ mit linearer Regression
@@ -23,6 +24,12 @@ Laden Sie die Daten unter https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5
 
 ```{r}
 # Ihre Lösung:
+#load data into data frame
+url = 'https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download'
+download.file(url,'download')
+df = readRDS('download')
+head(df)
+#df has 130 rows and 5 columns
 ```
 
 Verschaffen Sie sich einen ersten Überblick über die Daten. Plotten Sie dazu ein Mehrfach-Diagramm, das Scatterplots aller vier Variablen (drei Merkmale und Response `IQ.child`) untereinander zeigt. D.h. jede Variable soll mit jeder anderen paarweise verglichen werden.
@@ -31,6 +38,11 @@ Tipp: Mit der `caret::featurePlot`-Funktion lässt sich das gut erreichen.
 
 ```{r}
 # Ihre Lösung:
+
+caret::featurePlot(x = df[2:3],
+                   y= df[4:5],
+            plot = 'pairs',
+)
 ```
 
 ## Lineare Regression
@@ -39,11 +51,21 @@ Wenden Sie für diesen Datensatz eine lineare Regression an, um den IQ von Kinde
 
 ```{r}
 # Ihre Lösung:
+lm.iq = caret::train(IQ.child ~ IQ.mother + IQ.father + n.siblings, 
+              data = df,
+              method = 'lm',
+              )
+s = summary(lm.iq)
+print(s$coefficients)
+
 ```
 
 ### Merkmale
 
 Welche Merkmale spielen eine Rolle? Interpretieren Sie das Ergebnis.
+
+Der Fehler ist mit 8,999 sehr groß.
+Die p-values sind außer bei IQ.mother 
 
 ```{r}
 # Ihre Lösung:
@@ -53,9 +75,11 @@ Welche Merkmale spielen eine Rolle? Interpretieren Sie das Ergebnis.
 ### RSE
 
 Berechnen Sie den RSE. Was gibt dieser an?
+Der Residual Standard Error gibt an, wie viel Variamz noch bleibt, nachdem das lineare Modell angewandt wurde. Je kleiner der Wert, desto besser passt das lineare Modell.
 
 ```{r}
 # Ihre Lösung:
+print(paste0('sigma = RSE = ', s$sigma))
 ```
 
 ### Anteil erklärter Varianz
@@ -64,7 +88,9 @@ Wie groß (in Prozent) ist der Anteil der erklärten Varianz? Ist das Ergebnis z
 
 ```{r}
 # Ihre Lösung:
+print(paste0('R^2 = ', round(s$r.squared*100, digits = 2),' %'))
 ```
+Je näher der Wert der erklärten Varianz bei 1 liegt, desto besser erklärt das lineare Modell die beobachtete Varianz. Liegt der Wert nahe null, passt das Modell nicht gut. Der hier berechnete Wert von 0,47 liegt mittig, d.h. das lineare Modell passt nur mittelmäßig.
 
 ## Geschwister-Anzahl als Faktor
 
@@ -74,12 +100,29 @@ Wandeln Sie den Datensatz so um, dass die Anzahl der Geschwister (`n.siblings`) 
 
 ```{r}
 # Ihre Lösung:
+#convert n.siblings into factor
+df$n.siblings = as.factor(df$n.siblings)
+
+#apply linear regression
+lm.iq = caret::train(IQ.child ~ IQ.mother + IQ.father + n.siblings, 
+              data = df,
+              method = 'lm',
+              )
+s = summary(lm.iq)
+print(s$coefficients)
+
+#Calculate RSE
+print(paste0('sigma = RSE = ', s$sigma))
+
+#Calculate R^2
+print(paste0('R^2 = ', round(s$r.squared*100, digits = 2),' %'))
 ```
 
 ### $R^2$
 
 $R^2$ hat sich verändert. Interpretieren bzw. begründen Sie das Ergebnis:
 
+R^2 hat sich mit dem neuen Wert 0,66 mehr an 1 angenähert. Das bedeutet, dass das lineare Modell besser passt, wenn die Geschwisteranzahl als Faktor geführt wird. Grund dafür ist, dass die Geschwisteranzahl als numerisches Merkmal direkt mit den IQ-Werten falsch korelliert wird, sie werden also als niedriger IQ eingerechnet, was die Schätzung schlechter macht. Daher müssen sie als Faktor geführt werden.
 
 ## Schätzung für Testdaten
 
@@ -87,6 +130,14 @@ Abschließend soll mittels Cross-Validation überprüft werden, wie gut dieses V
 
 ```{r}
 # Ihre Lösung:
+kfcv = trainControl(method = 'cv',
+                    number = 5,
+                    returnResamp = 'all')
+class.fit = train(IQ.child ~ .,
+                  data = df,
+                  method = "lm",
+                  trControl = kfcv)
+print(class.fit)
 ```
 
 
