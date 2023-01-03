@@ -5,6 +5,7 @@ output: html_document
 
 ```{r echo = F, warning = F, message = F}
 # Laden Sie benötigte Libraries...
+library(dfStats)
 ```
 
 # Package-Erstellung

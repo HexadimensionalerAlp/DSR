@@ -39,7 +39,7 @@ Wenden Sie für diesen Datensatz eine lineare Regression an, um den IQ von Kinde
 
 ```{r}
 set.seed(42)
-lm.iq = train(IQ.child ~ IQ.mother + IQ.father + n.siblings, data = iq_df, method = 'lm', trControl = trainControl(method = 'cv', number = 5))
+lm.iq = train(IQ.child ~ IQ.mother + IQ.father + n.siblings, data = iq_df, method = 'lm')
 ```
 
 ### Merkmale
@@ -78,14 +78,14 @@ Wandeln Sie den Datensatz so um, dass die Anzahl der Geschwister (`n.siblings`) 
 ```{r}
 iq_df_siblings = iq_df
 iq_df_siblings$n.siblings = factor(iq_df_siblings$n.siblings)
-lm.iq_2 = train(IQ.child ~ IQ.mother + IQ.father + n.siblings, data = iq_df_siblings, method = 'lm', trControl = trainControl(method = 'cv', number = 5))
+lm.iq_2 = train(IQ.child ~ IQ.mother + IQ.father + n.siblings, data = iq_df_siblings, method = 'lm')
 summary(lm.iq_2)
 ```
 
 ### $R^2$
 
 $R^2$ hat sich verändert. Interpretieren bzw. begründen Sie das Ergebnis:
-$R^2$ hat sich verbessert.
+$R^2$ hat sich verbessert. TODO...
 
 
 ## Schätzung für Testdaten
@@ -94,6 +94,8 @@ Abschließend soll mittels Cross-Validation überprüft werden, wie gut dieses V
 
 ```{r}
 # Ihre Lösung:
+lm.iq_3 = train(IQ.child ~ IQ.mother + IQ.father + n.siblings, data = iq_df_siblings, method = 'lm', trControl = trainControl(method = 'cv', number = 5))
+lm.iq_3
 ```
 
 
