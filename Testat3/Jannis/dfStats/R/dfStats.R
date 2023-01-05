@@ -65,7 +65,6 @@ df_variance = function(data) {
 #' print(standard_deviation)
 df_standard_deviation = function(data) {
   result = sqrt(df_variance(data))
-  print(sd(getNumbers(data)))
   
   return(result)
 }
@@ -91,6 +90,6 @@ df_all_stats = function(data) {
 #' @param data a data frame
 #' @return A vector with the data frames numbers.
 getNumbers = function(data) {
-  numbers = data |> select(where(is.numeric)) |> na.omit()
+  numbers = data |> dplyr::select(where(is.numeric)) |> na.omit()
   return(unlist(numbers, use.names = FALSE))
 }
