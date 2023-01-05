@@ -28,6 +28,10 @@ Laden Sie abermals den Datensatz unter https://oc.informatik.hs-mannheim.de/s/K2
 
 ```{r}
 # Ihre Lösung:
+#load data into data frame
+url = 'https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download'
+download.file(url,'download')
+df = readRDS('download')
 ```
 
 ## KNN-Regression anwenden
@@ -38,6 +42,17 @@ Wenden Sie für diesen Datensatz eine KNN-Regression an, um den IQ von Kindern i
 
 ```{r}
 # Ihre Lösung:
+#knn.iq = caret::train(IQ.child ~ IQ.mother + IQ.father + n.siblings, 
+             # data = df,
+             # method = 'knn',
+             # )
+#s = summary(knn.iq)
+#print(s$coefficients)
+
+knn.iq = caret::knnreg(IQ.child ~ IQ.mother + IQ.father + n.siblings, 
+              data = df,
+              k=5)
+print(knn.iq)
 ```
 
 ### $k$?

@@ -28,8 +28,7 @@ Laden Sie die Daten unter https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5
 url = 'https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download'
 download.file(url,'download')
 df = readRDS('download')
-head(df)
-#df has 130 rows and 5 columns
+
 ```
 
 Verschaffen Sie sich einen ersten Überblick über die Daten. Plotten Sie dazu ein Mehrfach-Diagramm, das Scatterplots aller vier Variablen (drei Merkmale und Response `IQ.child`) untereinander zeigt. D.h. jede Variable soll mit jeder anderen paarweise verglichen werden.
@@ -64,13 +63,9 @@ print(s$coefficients)
 
 Welche Merkmale spielen eine Rolle? Interpretieren Sie das Ergebnis.
 
+Ihre Lösung:
+Die p-values für n.siblings nicht sehr weit von null entfernt. Daher kann nicht mit Sicherheit davon ausgegangen werden, dass die Parameter von null verschieden sind. n.siblings spielt also keine große Rolle für IQ.child. Da die p-values für IQ.father und IQ.mother weiter von null weg sind, spielen diese Merkmale eine Rolle für IQ.child. Scheinbar IG.mother mehr als IQ.father.
 Der Fehler ist mit 8,999 sehr groß.
-Die p-values sind außer bei IQ.mother 
-
-```{r}
-# Ihre Lösung:
-```
-
 
 ### RSE
 
