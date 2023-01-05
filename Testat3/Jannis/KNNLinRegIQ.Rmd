@@ -38,9 +38,10 @@ Wenden Sie für diesen Datensatz eine KNN-Regression an, um den IQ von Kindern i
 
 ```{r}
 set.seed(42)
-ctrl = trainControl(method = 'cv', number = 5)
-knn.iq = train(IQ.child ~ IQ.mother + IQ.father + n.siblings, data = iq_df, method = 'knn', trControl = ctrl, preProcess = c('center', 'scale'), tuneLength = 20)
-knn.iq
+ctrl = caret::trainControl(method = 'cv', number = 5)
+knn.iq = caret::train(IQ.child ~ IQ.mother + IQ.father + n.siblings, data = iq_df, method = 'knn', trControl = ctrl, preProcess = c('center', 'scale'), tuneLength = 20)
+predict(knn.iq, newdata = head(iq_df))
+head(iq_df)
 ```
 
 ### $k$?

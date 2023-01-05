@@ -19,15 +19,15 @@ Ein Einführungsvideo finden Sie unter https://youtu.be/sTJApaBjong. Weitere Inf
 
 Beschreiben Sie mit eigenen Worten (180 bis 220 Wörter), wie dieses Verfahren für die Regression und Klassifikation angewandt werden kann. Was sind die Vor- und Nachteile? Was sind die Besonderheiten im Vergleich zu anderen Verfahren?
 
-KNN kann für Regression verwendet werden, indem ein kontinuierlicher Zielwert vorhergesagt wird. Um eine Vorhersage für ein neues Objekt zu treffen, identifizieret der Algorithmus die k Objekte in den Trainingsdaten, die dem neuen Objekt im Merkmalsraum am ähnlichsten sind, und er würde den Mittelwert oder Median ihrer Zielwerte als Vorhersage für das neue Objekt verwenden.
+KNN kann für Regression verwendet werden, indem ein kontinuierlicher Zielwert vorhergesagt wird. Um eine Vorhersage für ein neues Objekt zu treffen, identifizieret der Algorithmus die k Objekte in den Trainingsdaten, die dem neuen Objekt im Merkmalsraum am ähnlichsten sind, und verwendet den Mittelwert der Zielwerte als Vorhersage für das neue Objekt.
 
 KNN kann zur Klassifikation verwendet werden, indem ein diskreter Zielwert vorhergesagt wird. Zum Beispiel, um vorherzusagen, ob eine Person eine bestimmte Krankheit hat, basierend auf ihrer Krankengeschichte und ihren Testergebnissen. 
 
 Vorteile des KNN Algorithmus sind, dass er flexibel einsetzbar ist, da er für Regression und Klassifikation verwendet werden kann. Außerdem erfordert er wenig Trainingsaufwand und ist robust gegenüber Ausreißern, da er auf den Werten der nächsten Nachbarn und nicht auf dem gesamten Datensatz basiert.
 
-Nachteile des Algorithmus sind, dass er rechenintensiv ist, was zu Problemen bei großen Datensätzen führen kann. Außerdem ist das Ergebnis komplett von k abhängig, wurde ein falsches k gewählt, hat das Einfluss auf das Ergebnis.
+Nachteile des Algorithmus sind, dass er rechenintensiv ist, was zu Problemen bei großen Datensätzen führen kann. Außerdem ist das Ergebnis komplett von k abhängig, wurde ein ungeeignetes k gewählt, hat das Einfluss auf das Ergebnis.
 
-Die Besonderheiten verglichen zu anderen Verfahren sind, dass KNN nicht-parametrisch ist, d.h. dass keine Annahmen über die funktionale Form der Beziehung zwischen den Merkmalen und dem Ziel gemacht werden, und es wird nicht vorausgesetzt, dass die Daten normalverteilt sind. Außerdem ist er instanzbasiert, d.h. es werden keine Modelle auf Grundlage der Trainingsdaten erstellt. 
+Die Besonderheiten verglichen zu anderen Verfahren sind, dass KNN nicht-parametrisch ist, d.h. dass keine Annahmen über die funktionale Form der Beziehung zwischen den Merkmalen und dem Ziel gemacht werden, und es wird nicht vorausgesetzt, dass die Daten normalverteilt sind.
 
 ## Daten importieren
 
@@ -36,9 +36,7 @@ Laden Sie abermals den Datensatz unter https://oc.informatik.hs-mannheim.de/s/K2
 ```{r}
 # Ihre Lösung:
 #load data into data frame
-url = 'https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download'
-download.file(url,'download')
-df = readRDS('download')
+df = readRDS(url('https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download'))
 ```
 
 ## KNN-Regression anwenden
@@ -67,9 +65,5 @@ Der beste Wert für die Anzahl der nächsten Nachbarn ist k=9. Mit dem Parameter
 Lassen Sie die $R^2$-Statistik berechnen. Wie sieht diese im Vergleich zur linearen Regression aus? Welches Verfahren ist besser?
 
 R^2 für k=9 ist 54,7%. Damit ist der Wert höher als der der linearen Regression, wenn die Anzahl der Geschwister nicht als Faktor geführt wird. Unter diesen Umständen passt KNN also besser. Werden allerdings die Geschwister in Faktoren umgewandelt und dann die lineare Regression angewendet, ist diese mit 66% das besser beschreibende Modell. Wandelt man bei KNN die Geschwisteranzahl in Faktoren um, ist R^2 kleiner (47%) und k=11 wird ausgewählt.
-
-```{r}
-# Ihre Lösung:
-```
 
 

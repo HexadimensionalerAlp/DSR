@@ -25,10 +25,7 @@ Laden Sie die Daten unter https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5
 ```{r}
 # Ihre Lösung:
 #load data into data frame
-url = 'https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download'
-download.file(url,'download')
-df = readRDS('download')
-
+df = readRDS(url('https://oc.informatik.hs-mannheim.de/s/K2nJQngd8N6o3M5/download'))
 ```
 
 Verschaffen Sie sich einen ersten Überblick über die Daten. Plotten Sie dazu ein Mehrfach-Diagramm, das Scatterplots aller vier Variablen (drei Merkmale und Response `IQ.child`) untereinander zeigt. D.h. jede Variable soll mit jeder anderen paarweise verglichen werden.
